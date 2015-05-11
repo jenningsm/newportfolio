@@ -1,95 +1,33 @@
-var Element = require('/home/mjennings/pagebuilder/html.js');
-
-function gFont(href){
-  return new Element('link').attribute({
-    'href' : href,
-    'rel' : 'stylesheet',
-    'type' : 'text/css'
-  })
-}
+var Element = require('/home/mjennings/pagebuilder/html.js')
+var styles = require('./styles.js')
+var xsvg = require('./x.js')
+var color = require('./color.js')
 
 
-var head = new Element('head').content(
-  gFont('http://fonts.googleapis.com/css?family=Calligraffitti'),
-  gFont('http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300'),
-  gFont('http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:300'),
-  new Element('link').attribute({
-    'href' : 'o.css',
-    'rel' : 'stylesheet',
-    'type' : 'text/css'
-  })
+
+var html = new Element('html').style(
+  styles.boxing()
 )
 
-var html = new Element('html').style({
-  'margin' : '0',
-  'padding' : '0'
-})
+var body = new Element('body').style(
+  styles.boxing()
+)
 
-var body = new Element('body').style({
-  'margin' : '0',
-  'padding' : '0'
-})
+var head = require('./components/head.js')
+
 
 var headerHeight = 16
+var items = ['ABOUT', 'SKILLS', 'EXPERIENCE', 'EDUCATION', 'CONTACT', 'PROJECTS']
 
-var header = new Element('div').style({
-  'height' : headerHeight + '%',
-  'width' : '100%',
-  'display' : 'flex',
-  'justify-content' : 'center',
-  'align-items' : 'center',
-}).content(
-  new Element('span').style({
-    'font-size' : '7.5vmin',
-    'font-family' : "'Calligraffitti', cursive",
-    'font-weight' : '400'
-  }).content(
-    'MJ'
-  )
-)
+var header = require('./components/header.js')(items, headerHeight)
 
-var border = '4px solid rgb(210, 180, 100)';
-
-var imgDims = {'width' : '100%', 'height' : (100 - 2 * headerHeight) + '%'}
-
-var img = new Element('img', 'src', './clouds.jpg').style({
-    'border-top' : border,
-    'border-bottom' : border
-  },
-  imgDims
-)
-
-var text = new Element('div').style(
-  imgDims,
-  {
-    'display' : 'flex',
-    'justify-content' : 'center',
-    'align-items' : 'center',
-    'position' : 'absolute',
-    'top' : headerHeight + '%',
-    'font-size' : '7vmin',
-    'color' : 'rgb(255, 255, 235)',
-    'font-weight' : '900',
-    'font-family' : "'Open Sans Condensed'"
-  }
-).content(
-  new Element('div').content(
-    new Element('span').content('FRONT-END DEVELOPER'),
-    new Element('span').content('READY FOR ACTION')
-  ).style({
-    'display' : 'flex',
-    'justify-content' : 'center',
-    'align-items' : 'center',
-    'flex-direction' : 'column'
-  })
-)
+var bulk = require('./components/bulk.js')(100 - 2 * headerHeight)
 
 html.content(
   head,
   body.content(
     header,
-    img,
-    text
+    bulk
   )
 )
 
