@@ -1,6 +1,7 @@
 
 var Element = require('/home/mjennings/pagebuilder/html.js')
 var styles = require('./styles.js')
+var colors = require('./color.js')
 
 module.exports.flex = function(dir, dims, align){
   var f = new Element('div').style(
@@ -20,4 +21,26 @@ module.exports.flex = function(dir, dims, align){
 
     return f
   }
+}
+
+var underlineDist = 17
+module.exports.underline = underline
+function underline(text, color, thickness){
+  if(color === undefined)
+    color = colors.pString
+  if(thickness === undefined)
+    thickness = 2
+
+  var style = {'position':'relative', 'display':'inline-block'}
+  return new Element('span')
+  .style(
+    {'top': '-' + underlineDist + '%',
+     'border-bottom': thickness + 'px solid ' + color },
+    style
+  ).content(
+    new Element('span').style('top', underlineDist + '%').content(
+      text
+    )
+    .style(style)
+  )
 }

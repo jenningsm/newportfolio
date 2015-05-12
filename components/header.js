@@ -30,15 +30,14 @@ module.exports = function(items, height){
   }
 
   var initials = new Element('span').style(
-    styles.font('7.5vmin', '400', "'Calligraffitti', cursive"),
-    {'padding' : '15px' }
+    styles.font('7.5vmin', '400', "'Calligraffitti', cursive")
   ).content(
     'MJ'
   )
 
   var center = flex('row', ['18%', '100%'], 'space-between')
   center(bar(), 1)
-  center(initials, 0)
+  center(initials, .67)
   center(bar(), 1)
 
 

@@ -27,7 +27,8 @@ module.exports = function(height){
     styles.dims('100%', height + '%'),
     {'position' : 'relative',
      'border-top' : border,
-     'border-bottom' : border}
+     'border-bottom' : border,
+     'box-sizing' : 'border-box'}
   )
 
   return bulk

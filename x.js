@@ -18,10 +18,10 @@ module.exports = function(size, unit, color){
     var line = new Element('line/').attribute({
       'fill' : 'none',
       'stroke-width' : lineWidth,
-      'x1' : positioning(i),
-      'y1' : positioning(0),
-      'x2' : positioning((i + 1) % 2),
-      'y2' : positioning(1)
+      'x1' : truncate(positioning(i), 2),
+      'y1' : truncate(positioning(0), 2),
+      'x2' : truncate(positioning((i + 1) % 2), 2),
+      'y2' : truncate(positioning(1), 2)
     })
     lines.push(line)
   }
