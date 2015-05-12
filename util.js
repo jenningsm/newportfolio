@@ -24,7 +24,7 @@ module.exports.flex = function(dir, dims, align){
 }
 
 module.exports.underline = underline
-function underline(text, color, thickness){
+function underline(text, thickness, color){
   var underlineDist = 17
   if(color === undefined)
     color = colors.pString
@@ -46,7 +46,7 @@ function underline(text, color, thickness){
 }
 
 module.exports.divUnderline = function(text, active, thickness, color){
-  var underlinePlace = 7
+  var underlinePlace = 9
   if(color === undefined)
     color = colors.pString
   if(thickness === undefined)
@@ -56,14 +56,20 @@ module.exports.divUnderline = function(text, active, thickness, color){
   var underline =  new Element('div').style(
     styles.dims("100%", thickness + "px"),
     { 'position' : 'absolute',
-      'bottom' : underlinePlace + '%',
+      'top' : (100 - underlinePlace) + '%',
       'background' : color,
       'z-index' : -1 }
   )
 
-  var div = new Element('div').style('position', 'relative').content(
-    new Element('span').content(text),
-    underline
+  var div = new Element('div')
+  .content(
+    new Element('div').content(
+      new Element('span').content(text),
+      underline
+    ).style({
+      'position' : 'relative',
+      'display' : 'inline-block'
+    })
   )
 
   if(active === false)

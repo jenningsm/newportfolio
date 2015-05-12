@@ -1,9 +1,9 @@
 
 var Element = require('/home/mjennings/pagebuilder/html.js')
-var styles = require('../styles.js')
-var colors = require('../color.js')
-var util = require('../util.js')
-var xsvg = require('../x.js')
+var styles = require('./styles.js')
+var colors = require('./color.js')
+var util = require('./util.js')
+var xsvg = require('./x.js')
 
 var pageWidth = "60%"
 var pageMargin = "40px"
@@ -20,10 +20,9 @@ function page(title, body){
     util.flex("row", ["100%", ''])(
       util.divUnderline(title).div
       .style(styles.font("2.5em"))
-    ).style(
-      {'margin-bottom' : pageMargin}
     ),
-    body
+    body.style('margin', pageMargin + ' 0'),
+    util.flex("row")(util.divUnderline("Back to top", true, 2).div)
   )
 }
 
@@ -36,10 +35,7 @@ module.exports.selectionPage = function(title, subtitle, options){
       displayUnderline = true
 
     selection(
-      new Element('div').content(
-        util.divUnderline(options[i][0], displayUnderline).div
-        .style('display', 'inline-block')
-      ).style({
+      util.divUnderline(options[i][0], displayUnderline).div.style({
         'width' : '0',
         'text-align' : 'center'
       }),
@@ -50,9 +46,14 @@ module.exports.selectionPage = function(title, subtitle, options){
 
   }
   selection().style(
-    styles.font("1.25em"),
-    {'border-bottom' : '1px solid rgba(210, 180, 100, 1)',
-     'padding-bottom' : '7px'}
+    styles.font("1.25em")
   )
-  return page(title, selection())
+
+  var body = new Element('div').style('width', '100%')
+  .content(
+    selection().style('margin-bottom', pageMargin),
+    new Element('div').content("Body")
+  )
+
+  return page(title, body)
 }
