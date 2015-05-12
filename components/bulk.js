@@ -5,10 +5,15 @@ var flex = require('../util.js').flex
 
 module.exports = function(height){
 
-  var img = new Element('img', 'src', './clouds.jpg').style(
-    { 'position' : 'absolute' },
-    styles.dims('100%', '100%')
-  )
+  var img = new Element('img', 'src', './clouds.jpg').style({
+    'position' : 'absolute',
+    'width' : 'auto',
+    'height' : 'auto',
+    'top' : '50%',
+    'left' : '50%',
+    'text-align' : 'center',
+    'transform' : 'translate(-50%, -50%)'
+  })
   
   var text = flex("column", ['100%', '100%'])(
     new Element('span').content('FRONT-END DEVELOPER'), 0,
@@ -28,7 +33,8 @@ module.exports = function(height){
     {'position' : 'relative',
      'border-top' : border,
      'border-bottom' : border,
-     'box-sizing' : 'border-box'}
+     'box-sizing' : 'border-box',
+     'overflow' : 'hidden'}
   )
 
   return bulk

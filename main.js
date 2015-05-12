@@ -11,7 +11,7 @@ var html = new Element('html').style(
 
 var body = new Element('body').style(
   styles.boxing(),
-  {'font-family' : "'Open Sans Condensed', sans serif", 'font-weight' : '400'}
+  {'font-family' : "'Open Sans Condensed', sans serif", 'font-weight' : '400', 'text-align' : 'center'}
 )
 
 var head = require('./components/head.js')
@@ -36,13 +36,16 @@ var frontBottom = flex("row", ["100%", headerHeight + "%"])(
   styles.font("3.75vmin", "400", "'Open Sans Condensed'")
 )
 
+var sun = flex("row", ['100%', ''])(require('./sun.js')(50, 'px')).style('margin-bottom', '20px')
+
 html.content(
   head,
   body.content(
     header,
     bulk,
     frontBottom,
-    require('./components/about.js')
+    sun,
+    require('./components/about.js')(headerHeight)
   )
 )
 
