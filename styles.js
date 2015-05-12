@@ -1,6 +1,3 @@
-var pageWidth = "80%"
-var pageMargin = "40px"
-module.exports.page = {'width' : pageWidth, 'margin' : pageMargin + ' auto'}
 
 module.exports.flex = function(dir, justify, align){
   if(dir === undefined)

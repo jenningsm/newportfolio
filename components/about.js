@@ -1,25 +1,9 @@
 
 var Element = require('/home/mjennings/pagebuilder/html.js')
-var styles = require('../styles.js')
-var xsvg = require('../x.js')
-var color = require('../color.js')
-var util = require('../util.js')
-
-
-var about = util.flex("column", ["100%", ''])
-about().style(styles.page)
-
-var title = util.divUnderline("ABOUT ME")
-.style(
-  styles.font("2.5em")
-)
+var templates = require('./templates.js')
 
 var body = new Element('div')
-.style({'width' : '50%', 'text-align' : 'center'})
 .content("My name is Michael Jennings and blah blah blah" +
          " whatever gets said here that's what I say.")
 
-about(title)
-about(body)
-
-module.exports = about()
+module.exports = templates.page("ABOUT ME", body)
