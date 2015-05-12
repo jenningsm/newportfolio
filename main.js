@@ -36,7 +36,7 @@ var frontBottom = flex("row", ["100%", headerHeight + "%"])(
   styles.font("3.75vmin", "400", "'Open Sans Condensed'")
 )
 
-var sun = flex("row", ['100%', ''])(require('./sun.js')(50, 'px')).style('margin-bottom', '20px')
+var sun = flex("row", ['100%', ''])(require('./sun.js')(50, 'px'))
 
 html.content(
   head,
@@ -45,7 +45,7 @@ html.content(
     bulk,
     frontBottom,
     sun,
-    require('./components/about.js')(headerHeight)
+    require('./components/about.js')
   )
 )
 

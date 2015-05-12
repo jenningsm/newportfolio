@@ -3,21 +3,23 @@ var Element = require('/home/mjennings/pagebuilder/html.js')
 var styles = require('../styles.js')
 var xsvg = require('../x.js')
 var color = require('../color.js')
-var flex = require('../util.js').flex
-
+var util = require('../util.js')
+var flex = util.flex
+var divUnderline = util.divUnderline
 
 module.exports = function(items, height){
   var menus = []
   
   for(var i = 0; i < 2; i++){
-    menus[i] = flex('row', ["33%", "100%"])
+    menus[i] = flex('row', ["33%", "100%"], 'space-around')
  
     for(var j = 0; j < items.length / 2; j++){
       var item = items[i * (items.length/2) + j]
 
-      menus[i](new Element('span').content(item), 1)
+      //menus[i](new Element('span').content(item))
+      menus[i](util.divUnderline(item, false).div)
       if(j !== (items.length / 2) - 1)
-        menus[i](xsvg(17, 'px'), 1)
+        menus[i](xsvg(17, 'px'))
     }
   }
   
@@ -30,7 +32,7 @@ module.exports = function(items, height){
   }
 
   var initials = new Element('span').style(
-    styles.font('7.5vmin', '400', "'Calligraffitti', cursive")
+    styles.font('7.4vmin', '400', "'Calligraffitti', cursive")
   ).content(
     'MJ'
   )
