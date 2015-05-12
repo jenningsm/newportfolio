@@ -1,6 +1,7 @@
 var Element = require('/home/mjennings/pagebuilder/html.js')
 var color = require('../color.js')
 var styles = require('../styles.js')
+var flex = require('../util.js').flex
 
 module.exports = function(height){
 
@@ -9,34 +10,25 @@ module.exports = function(height){
     styles.dims('100%', '100%')
   )
   
-  var text = new Element('div').style(
-    styles.dims('100%', '100%'),
-    styles.flex(),
+  var text = flex("column", ['100%', '100%'])(
+    new Element('span').content('FRONT-END DEVELOPER'), 0,
+    new Element('span').content('READY FOR ACTION'), 0
+  ).style(
     styles.font('7vmin', '900', "'Open Sans Condensed', sans serif"),
-    {
-      'position' : 'absolute',
-      'color' : 'rgb(255, 255, 235)',
-    }
-  ).content(
-    new Element('div').content(
-      new Element('span').content('FRONT-END DEVELOPER'),
-      new Element('span').content('READY FOR ACTION')
-    ).style(
-      styles.flex('column')
-    )
+    { 'position' : 'absolute',
+      'color' : 'rgb(255, 255, 235)' }
   )
 
   var border = '4px solid ' + color.pString
 
   var bulk = new Element('div')
   bulk.content(img, text)
-  .style({
-    'position' : 'relative',
-    'width' : '100%',
-    'height' : height + '%',
-    'border-top' : border,
-    'border-bottom' : border
-  })
+  .style(
+    styles.dims('100%', height + '%'),
+    {'position' : 'relative',
+     'border-top' : border,
+     'border-bottom' : border}
+  )
 
   return bulk
 
