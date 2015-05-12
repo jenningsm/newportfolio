@@ -16,7 +16,12 @@ module.exports.flex = function(dir, justify, align){
 }
 
 module.exports.dims = function(width, height){
-  return { 'width' : width, 'height' : height }
+  var d = {}
+  if(width !== '')
+    d.width = width
+  if(height !== '')
+    d.height = height
+  return d
 }
 
 module.exports.font = function(size, weight, family){

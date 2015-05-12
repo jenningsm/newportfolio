@@ -45,7 +45,9 @@ html.content(
     bulk,
     frontBottom,
     sun,
-    require('./components/about.js')
+    require('./components/about.js'),
+    sun,
+    require('./components/projects.js')
   )
 )
 

@@ -45,7 +45,7 @@ function underline(text, color, thickness){
   )
 }
 
-module.exports.divUnderline = function(text, active, color, thickness){
+module.exports.divUnderline = function(text, active, thickness, color){
   var underlinePlace = 7
   if(color === undefined)
     color = colors.pString
@@ -66,10 +66,8 @@ module.exports.divUnderline = function(text, active, color, thickness){
     underline
   )
 
-  if(active === false){
+  if(active === false)
     underline.style('display', 'none')
-    return {'div' : div, "underline" : underline}
-  } else {
-    return div
-  }
+
+  return {'div' : div, "underline" : underline}
 }
