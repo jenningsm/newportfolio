@@ -1,5 +1,6 @@
 var Element = require('/home/mjennings/pagebuilder/html.js')
 var defaultColor = require('../color.js').pString
+var svg = require('./svg.js')
 
 //creates an svg X image, with given size and color
 module.exports = function(size, color){
@@ -9,38 +10,19 @@ module.exports = function(size, color){
 
   var lineWidth = .25
 
-  var lines = [];
 
   function positioning(i){
     return .5 + (i === 0 ? -1 : 1) * (.5 - lineWidth / 3)
   }
 
+  var x = svg(size, size, color)
+
   for(var i = 0; i < 2; i++){
-    var line = new Element('line/').attribute({
-      'fill' : 'none',
-      'stroke-width' : lineWidth,
-      'x1' : truncate(positioning(i), 2),
-      'y1' : truncate(positioning(0), 2),
-      'x2' : truncate(positioning((i + 1) % 2), 2),
-      'y2' : truncate(positioning(1), 2)
-    })
-    lines.push(line)
+    x([positioning(i), positioning(0)],
+      [positioning((i + 1) % 2), positioning(1)],
+      lineWidth)
   }
 
-  return new Element('svg').attribute({
-    'viewBox' : '0 0 1 1',
-    'xmlns' : 'http://www.w3.org/2000/svg',
-    'version' : '1.1',
-    'height' : size,
-    'width' : size,
-    'stroke' : color
-  })
-  .content(lines)
-
+  return x()
 }
 
-function truncate(number, precision){
-  number = number * Math.pow(10, precision)
-  number = Math.round(number)
-  return number / Math.pow(10, precision)
-}

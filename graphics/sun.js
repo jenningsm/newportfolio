@@ -1,6 +1,7 @@
 
 var Element = require('/home/mjennings/pagebuilder/html.js')
 var color = require('../color.js').pString
+var svg = require('./svg.js')
 
 /*
   Creates an svg sun.
@@ -11,9 +12,10 @@ var color = require('../color.js').pString
          for each point, that point will have a line between it
          and the point x spots over
 */
-module.exports = function(size, numPoints, skips){
+module.exports = function(size, numPoints, skips, lineWidth){
 
-  var lineWidth = .04
+  if(lineWidth === undefined)
+    lineWidth = .04
 
   var lines = [];
 
@@ -23,39 +25,19 @@ module.exports = function(size, numPoints, skips){
     skips = [4, 6];
   var startAng = Math.random() * 2 * Math.PI
 
+  var sun = svg(size, size, color)
+
   for(var i = 0; i < numPoints; i++){
     var ang = startAng + i * 2 * Math.PI / numPoints
     var here = [.5 + .5 * Math.cos(ang), .5 + .5 * Math.sin(ang)]
     for(var j = 0; j < skips.length; j++){
       ang = startAng + (i + skips[j]) * (2 * Math.PI / numPoints)
       var there = [.5 + .5 * Math.cos(ang), .5 + .5 * Math.sin(ang)]
-      var line = new Element('line/').attribute({
-        'x1' : truncate(here[0], 2),
-        'y1' : truncate(here[1], 2),
-        'x2' : truncate(there[0], 2),
-        'y2' : truncate(there[1], 2)
-      }).style({
-        'fill' : 'none',
-        'stroke-width' : lineWidth,
-      })
-      lines.push(line)
+
+      sun(here, there, lineWidth)
     }
   }
 
-  return new Element('svg').attribute({
-    'viewBox' : '0 0 1 1',
-    'xmlns' : 'http://www.w3.org/2000/svg',
-    'version' : '1.1',
-    'height' : size,
-    'width' : size,
-    'stroke' : color
-  })
-  .content(lines)
-
+  return sun()
 }
 
-function truncate(number, precision){
-  number = number * Math.pow(10, precision)
-  number = Math.round(number)
-  return number / Math.pow(10, precision)
-}
