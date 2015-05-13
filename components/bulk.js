@@ -3,6 +3,10 @@ var color = require('../color.js')
 var styles = require('../styles.js')
 var flex = require('../util.js').flex
 
+/*
+  The main picture area at the top of the page
+*/
+
 module.exports = function(height){
 
   var img = new Element('img', 'src', './clouds.jpg').style({
@@ -28,7 +32,7 @@ module.exports = function(height){
   var border = '4px solid ' + color.pString
 
   var bulk = new Element('div')
-  bulk.content(img, text)
+  .content(img, text)
   .style(
     styles.dims('100%', height + '%'),
     {'position' : 'relative',

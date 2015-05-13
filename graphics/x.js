@@ -1,7 +1,8 @@
 var Element = require('/home/mjennings/pagebuilder/html.js')
-var defaultColor = require('./color.js').pString
+var defaultColor = require('../color.js').pString
 
-module.exports = function(size, unit, color){
+//creates an svg X image, with given size and color
+module.exports = function(size, color){
 
   if(color === undefined)
     color = defaultColor
@@ -30,8 +31,8 @@ module.exports = function(size, unit, color){
     'viewBox' : '0 0 1 1',
     'xmlns' : 'http://www.w3.org/2000/svg',
     'version' : '1.1',
-    'height' : size + unit,
-    'width' : size + unit,
+    'height' : size,
+    'width' : size,
     'stroke' : color
   })
   .content(lines)

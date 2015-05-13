@@ -3,9 +3,17 @@ var Element = require('/home/mjennings/pagebuilder/html.js')
 var styles = require('./styles.js')
 var colors = require('./color.js')
 var util = require('./util.js')
-var xsvg = require('./x.js')
+var xsvg = require('./graphics/x.js')
+
+
+/*
+  page takes a title (e.g. "ABOUT") and the main content for
+  that page (called 'body') and returns an element for that page
+*/
 
 var pageWidth = "60%"
+
+//the vertical margins at the top and bottom of the page
 var pageMargin = "50px"
 var pageStyle = {
   'width' : pageWidth,
@@ -27,22 +35,32 @@ function page(title, body){
 }
 
 /*
-  options is an array consisting of each of option a user can click on
+  selection page is for a page that has options a user can click on for
+  different content. Each option has a name, that will appear on the menu
+  bar, and its content  
 
-  each element is an array whose first element is the title and the second
-  element is the content
+  the options argument is an array containing all the options. Each option
+  is an array whose first member is the name and second member is the content
+  for the option
 */
 module.exports.selectionPage = function(title, options){
 
   var middle = Math.floor((options.length - 1) / 2)
 
-  var selection = util.flex("row", ["100%", ''])
+  //menu bar
+  var menu = util.flex("row", ["100%", ''])
+  menu().style(
+    styles.font("1.25em"),
+    {'margin-bottom' : '35px'}
+  )
+
   for(var i = 0; i < options.length; i++){
     var displayUnderline = false
     //if this is in the middle
     if(i === middle)
       displayUnderline = true
-    selection(
+
+    menu(
       util.divUnderline(options[i][0], displayUnderline).div.style({
         'width' : '0',
         'text-align' : 'center'
@@ -50,28 +68,25 @@ module.exports.selectionPage = function(title, options){
     1)
 
     if(i !== options.length - 1)
-      selection(xsvg(17, 'px'))
+      menu(xsvg('17px'))
 
   }
-  selection().style(
-    styles.font("1.25em"),
-    {'margin-bottom' : '35px'}
-  )
 
-  var descriptions = []
+  var bodies = []
   for(var i = 0; i < options.length; i++){
-    var description = new Element('div').content(options[i][1])
+    var body = new Element('div').content(options[i][1])
     if(i !== middle)
-      description.style('display', 'none')
+      body.style('display', 'none')
 
-    descriptions.push(description)
+    bodies.push(body)
   }
 
-  var body = new Element('div').style('width', '100%')
-  .content(
-    selection(),
-    descriptions 
+  return page(title,
+    new Element('div').style('width', '100%')
+    .content(
+      menu(),
+      new Element('div').content(bodies)
+    )
   )
 
-  return page(title, body)
 }

@@ -1,8 +1,17 @@
 
 var Element = require('/home/mjennings/pagebuilder/html.js')
-var color = require('./color.js').pString
+var color = require('../color.js').pString
 
-module.exports = function(size, unit, numPoints, skips){
+/*
+  Creates an svg sun.
+
+  size: the size of the sun
+  numPoints: the number of points the sun has
+  skips: an array of integers. For each integer x in this array,
+         for each point, that point will have a line between it
+         and the point x spots over
+*/
+module.exports = function(size, numPoints, skips){
 
   var lineWidth = .04
 
@@ -37,8 +46,8 @@ module.exports = function(size, unit, numPoints, skips){
     'viewBox' : '0 0 1 1',
     'xmlns' : 'http://www.w3.org/2000/svg',
     'version' : '1.1',
-    'height' : size + unit,
-    'width' : size + unit,
+    'height' : size,
+    'width' : size,
     'stroke' : color
   })
   .content(lines)

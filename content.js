@@ -1,6 +1,8 @@
 
 var fs = require('fs');
 
+//takes the name of a file and returns an array containing
+//each of the paragraphs in that file
 module.exports = function(filename){
   var text = fs.readFileSync('./content/' + filename, 'utf8')
   text = text.split("\n\n")
