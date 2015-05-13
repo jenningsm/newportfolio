@@ -6,11 +6,11 @@ var flex = require('./util.js').flex
 
 
 var html = new Element('html').style(
-  styles.boxing()
+  {'margin' : '0', 'padding' : '0'}
 )
 
 var body = new Element('body').style(
-  styles.boxing(),
+  {'margin' : '0', 'padding' : '0'},
   {'font-family' : "'Open Sans Condensed', sans serif", 'font-weight' : '400', 'text-align' : 'center'}
 )
 

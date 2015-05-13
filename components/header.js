@@ -16,7 +16,6 @@ module.exports = function(items, height){
     for(var j = 0; j < items.length / 2; j++){
       var item = items[i * (items.length/2) + j]
 
-      //menus[i](new Element('span').content(item))
       menus[i](util.divUnderline(item, false).div)
       if(j !== (items.length / 2) - 1)
         menus[i](xsvg(17, 'px'))

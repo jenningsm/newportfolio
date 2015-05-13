@@ -19,7 +19,7 @@ module.exports.dims = function(width, height){
   var d = {}
   if(width !== '')
     d.width = width
-  if(height !== '')
+  if(height !== undefined && height !== '')
     d.height = height
   return d
 }
@@ -34,13 +34,4 @@ module.exports.font = function(size, weight, family){
     ret['font-family'] = family
 
   return ret
-}
-
-module.exports.boxing = function(padding, margin){
-  if(padding === undefined)
-    padding = '0'
-  if(margin === undefined)
-    margin = '0'
-
-  return { 'margin' : margin, 'padding' : padding }
 }
