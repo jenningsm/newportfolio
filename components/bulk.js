@@ -7,18 +7,22 @@ var flex = require('../util.js').flex
   The main picture area at the top of the page
 */
 
-module.exports = function(height){
+module.exports = function(headerHeight, parallaxRatio){
+
+  var bulkHeight = 100 - 2 * headerHeight
+
+  var imgHeight = 100 * (1 + 2 * (headerHeight * parallaxRatio) / bulkHeight) 
 
   var img = new Element('img', 'src', './clouds.jpg').style({
-    'position' : 'absolute',
     'width' : 'auto',
-    'height' : 'auto',
-    'min-width' : '100%',
-    'min-height' : '100%',
-    'top' : '50%',
-    'left' : '50%',
-    'transform' : 'translate(-50%, -50%)'
+    'min-height' : imgHeight + "%",
+    'height' : imgHeight + "%",
   })
+
+  /* TODO: if the image is not as wide as the container in the browser, we need to add
+     client side js to set the width to 100% and the height to auto and negate the min-height*/
+
+  var imgContainer = flex("column", ['100%', '100%'])(img).style('position', 'absolute')
   
   var text = flex("column", ['100%', '100%'])(
     new Element('span').content('FRONT-END DEVELOPER'), 0,
@@ -32,9 +36,9 @@ module.exports = function(height){
   var border = '4px solid ' + color.pString
 
   var bulk = new Element('div')
-  .content(img, text)
+  .content(imgContainer, text)
   .style(
-    styles.dims('100%', height + '%'),
+    styles.dims('100%', bulkHeight + '%'),
     {'position' : 'relative',
      'border-top' : border,
      'border-bottom' : border,
@@ -42,6 +46,6 @@ module.exports = function(height){
      'overflow' : 'hidden'}
   )
 
-  return bulk
+  return {'img' : imgContainer, 'div' : bulk}
 
 }

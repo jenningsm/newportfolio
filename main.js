@@ -10,6 +10,8 @@ var html = new Element('html').style(
 )
 
 var scripts = [
+  new Element('script', 'src', 'cs/viewport.js'),
+  new Element('script', 'src', 'cs/parallax.js'),
   new Element('script', 'src', 'cs/motion.js'),
   new Element('script', 'src', 'cs/move.js'),
   new Element('script', 'src', 'cs/sections.js'),
@@ -29,7 +31,9 @@ var headerHeight = 16
 var items = [['ABOUT', 'about'], ['EXPERIENCE'], ['PROJECTS', 'projects'], ['CONTACT', 'contact']]
 
 var header = require('./components/header.js')(items, headerHeight)
-var bulk = require('./components/bulk.js')(100 - 2 * headerHeight)
+
+var parallaxRatio = .5
+var bulk = require('./components/bulk.js')(headerHeight, parallaxRatio)
 
 
 var tagline = new Element('span').content("SEE WHAT I CAN DO")
@@ -53,7 +57,7 @@ html.content(
   head,
   body.content(
     header,
-    bulk,
+    bulk.div,
     frontBottom,
     sun,
     sections.about,
@@ -63,7 +67,11 @@ html.content(
   )
 )
 
-var p = html.generate({'sections' : sections}, true);
+var p = html.generate({
+  'sections' : sections,
+   'img' : bulk.img,
+  'parallax' : {'ratio' : parallaxRatio, 'headerHeight' : headerHeight, 'imgHeight' : (100 - 2 * headerHeight) }
+},true);
 
 var fs = require('fs');
 if(p.css !== undefined){
