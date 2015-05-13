@@ -32,9 +32,10 @@ function toSection(section){
   } else {
     target = 0
   }
-  new MoveGen(pageMover, Math.abs(target - start) / 500)
+
+  new MoveGen(pageMover, 1)
   .ends(start, target)
-  .acceleration(3, 3, 1)
+  .acceleration(1, 1, .5)
   .run()
 }
 
