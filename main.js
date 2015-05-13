@@ -9,6 +9,12 @@ var html = new Element('html').style(
   {'margin' : '0', 'padding' : '0'}
 )
 
+var scripts = [
+  new Element('script', 'src', 'cs/motion.js'),
+  new Element('script', 'src', 'cs/move.js'),
+  new Element('script', 'src', 'cs/sections.js'),
+]
+
 var body = new Element('body').style({
  'margin' : '0',
  'padding' : '0',
@@ -20,7 +26,7 @@ var body = new Element('body').style({
 var head = require('./components/head.js')
 
 var headerHeight = 16
-var items = ['ABOUT', 'EXPERIENCE', 'PROJECTS', 'CONTACT']
+var items = [['ABOUT', 'about'], ['EXPERIENCE'], ['PROJECTS', 'projects'], ['CONTACT', 'contact']]
 
 var header = require('./components/header.js')(items, headerHeight)
 var bulk = require('./components/bulk.js')(100 - 2 * headerHeight)
@@ -40,6 +46,9 @@ var frontBottom = flex("row", ["100%", headerHeight + "%"])(
 
 var sun = flex("row", ['100%', ''])(require('./graphics/sun.js')('50px'))
 
+var sections = { 'about' : require('./components/about.js'),
+                 'projects' : require('./components/projects.js')}
+
 html.content(
   head,
   body.content(
@@ -47,13 +56,14 @@ html.content(
     bulk,
     frontBottom,
     sun,
-    require('./components/about.js'),
+    sections.about,
     sun,
-    require('./components/projects.js')
+    sections.projects,
+    scripts
   )
 )
 
-var p = html.generate({}, false);
+var p = html.generate({'sections' : sections}, true);
 
 var fs = require('fs');
 if(p.css !== undefined){

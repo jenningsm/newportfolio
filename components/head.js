@@ -16,4 +16,4 @@ module.exports = new Element('head').content(
     'rel' : 'stylesheet',
     'type' : 'text/css'
   })
-)
+).embedJS()
