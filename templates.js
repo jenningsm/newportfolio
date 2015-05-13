@@ -30,7 +30,7 @@ function page(title, body){
       .style(styles.font("2.5em"))
     ),
     body.style('margin', pageMargin + ' 0'),
-    util.flex("row")(util.divUnderline("Back to top", true, .5).div)
+    util.flex("row")(util.divUnderline("Back to top", true, .5).div.attribute("onclick", "toSection()"))
   )
 }
 
