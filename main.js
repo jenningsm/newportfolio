@@ -51,7 +51,7 @@ html.content(
   )
 )
 
-var p = html.generate({}, true);
+var p = html.generate({}, false);
 
 var fs = require('fs');
 if(p.css !== undefined){

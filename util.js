@@ -23,9 +23,38 @@ module.exports.flex = function(dir, dims, align){
   }
 }
 
+var underlinePlace = 9
+
+module.exports.spanUnderline = function(text, thickness, color){
+  if(color === undefined)
+    color = colors.pString
+
+  if(thickness === undefined)
+    thickness = 1
+
+  thickness = truncate(4 * thickness, 2)
+
+  var displacement = truncate(underlinePlace * 2 / 100, 2) + 'em'
+
+  return new Element('span')
+  .style({
+    'top' : '-' + displacement,
+    'position' : 'relative',
+    'display' : 'inline-block',
+    'border-bottom' : thickness + 'px solid ' + color
+   })
+  .content(
+    new Element('span').style({
+      'top' : displacement,
+      'display' : 'inline-block',
+      'position' : 'relative'
+    })
+    .content(text)
+  )
+
+}
 
 module.exports.divUnderline = function(text, active, thickness, color){
-  var underlinePlace = 9
   if(color === undefined)
     color = colors.pString
 
@@ -52,6 +81,7 @@ module.exports.divUnderline = function(text, active, thickness, color){
       'display' : 'inline-block'
     })
   )
+  .style('display', 'inline-block')
 
   if(active === false)
     underline.style('display', 'none')

@@ -9,9 +9,10 @@ module.exports = function(height){
     'position' : 'absolute',
     'width' : 'auto',
     'height' : 'auto',
+    'min-width' : '100%',
+    'min-height' : '100%',
     'top' : '50%',
     'left' : '50%',
-    'text-align' : 'center',
     'transform' : 'translate(-50%, -50%)'
   })
   

@@ -33,13 +33,15 @@ function page(title, body){
   element is the content
 */
 module.exports.selectionPage = function(title, options){
+
+  var middle = Math.floor((options.length - 1) / 2)
+
   var selection = util.flex("row", ["100%", ''])
   for(var i = 0; i < options.length; i++){
     var displayUnderline = false
     //if this is in the middle
-    if(i === options.length / 2 || i === (options.length-1) / 2)
+    if(i === middle)
       displayUnderline = true
-
     selection(
       util.divUnderline(options[i][0], displayUnderline).div.style({
         'width' : '0',
@@ -52,13 +54,23 @@ module.exports.selectionPage = function(title, options){
 
   }
   selection().style(
-    styles.font("1.25em")
+    styles.font("1.25em"),
+    {'margin-bottom' : '35px'}
   )
+
+  var descriptions = []
+  for(var i = 0; i < options.length; i++){
+    var description = new Element('div').content(options[i][1])
+    if(i !== middle)
+      description.style('display', 'none')
+
+    descriptions.push(description)
+  }
 
   var body = new Element('div').style('width', '100%')
   .content(
     selection(),
-    options[1][1]
+    descriptions 
   )
 
   return page(title, body)

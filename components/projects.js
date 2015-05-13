@@ -10,34 +10,41 @@ var pages = ['electrodynamics', 'deftly', 'portfolio']
 for(var i = 0; i < pages.length; i++){
   var page = content("projects/" + pages[i])
   var title = page[0]
-  var subTitle = new Element("span")
 
-  split = page[1].split(/[(\$\()\)]/).filter(function(e) { return e })
+  var description = new Element('div')
+
+  for(var j = 1; j < page.length; j++){
+    description.content(new Element('p').content(linkify(page[j])))
+  }
+
+  pages[i] = [title, description]
+}
+
+module.exports = templates.selectionPage("PROJECTS", pages)
+
+
+
+/////////////////////////////////////////////////
+
+function linkify(text){
+  split = text.split(/[(\$\()\)]/).filter(function(e) { return e })
+
+  var ret = []
 
   var open = false
-  var linkSpot = page[1].indexOf('$')
-  if(linkSpot === 0)
+  if(text.indexOf('$') === 0)
     open = true
+
   for(var j = 0; j < split.length; j++){
     var item
     if(open){
-      item = util.divUnderline(split[j], true, .5).div.style('display' , 'inline-block')
+      item = util.spanUnderline(split[j], .5)
       open = false
     } else {
       item = split[j]
       open = true
     }
-    subTitle.content(item)
+    ret.push(item)
   }
-
-  page.splice(0, 2)
-  var body = "<p>" + page.join("</p><p>") + "</p>"
-
-  pages[i] = [title,
-              new Element().content(
-                util.flex("row", ["100%", ''])(subTitle).style('margin', '30px 0 25px 0'),
-                body
-              )]
+  return ret
 }
-
-module.exports = templates.selectionPage("PROJECTS", pages)
