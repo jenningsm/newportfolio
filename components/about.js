@@ -4,6 +4,6 @@ var templates = require('../templates.js')
 var content = require('../content.js')
 
 var body = new Element('div')
-.content(content("about"))
+.content("<p>" + content("about").join("</p><p>") + "</p>")
 
 module.exports = templates.page("ABOUT ME", body)

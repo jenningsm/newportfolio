@@ -22,11 +22,11 @@ function page(title, body){
       .style(styles.font("2.5em"))
     ),
     body.style('margin', pageMargin + ' 0'),
-    util.flex("row")(util.divUnderline("Back to top", true, 2).div)
+    util.flex("row")(util.divUnderline("Back to top", true, .5).div)
   )
 }
 
-module.exports.selectionPage = function(title, subtitle, options){
+module.exports.selectionPage = function(title, options){
   var selection = util.flex("row", ["100%", ''])
   for(var i = 0; i < options.length; i++){
     var displayUnderline = false
@@ -51,8 +51,8 @@ module.exports.selectionPage = function(title, subtitle, options){
 
   var body = new Element('div').style('width', '100%')
   .content(
-    selection().style('margin-bottom', pageMargin),
-    new Element('div').content("Body")
+    selection(),
+    options[0][1].style('margin', '20px 0')
   )
 
   return page(title, body)

@@ -23,35 +23,16 @@ module.exports.flex = function(dir, dims, align){
   }
 }
 
-module.exports.underline = underline
-function underline(text, thickness, color){
-  var underlineDist = 17
-  if(color === undefined)
-    color = colors.pString
-  if(thickness === undefined)
-    thickness = 2
-
-  var style = {'position':'relative', 'display':'inline-block'}
-  return new Element('span')
-  .style(
-    {'top': '-' + underlineDist + '%',
-     'border-bottom': thickness + 'px solid ' + color },
-    style
-  ).content(
-    new Element('span').style('top', underlineDist + '%').content(
-      text
-    )
-    .style(style)
-  )
-}
 
 module.exports.divUnderline = function(text, active, thickness, color){
   var underlinePlace = 9
   if(color === undefined)
     color = colors.pString
-  if(thickness === undefined)
-    thickness = 4
 
+  if(thickness === undefined)
+    thickness = 1
+
+  thickness = truncate(4 * thickness, 2)
 
   var underline =  new Element('div').style(
     styles.dims("100%", thickness + "px"),
@@ -76,4 +57,10 @@ module.exports.divUnderline = function(text, active, thickness, color){
     underline.style('display', 'none')
 
   return {'div' : div, "underline" : underline}
+}
+
+function truncate(number, precision){
+  number = number * Math.pow(10, precision)
+  number = Math.round(number)
+  return number / Math.pow(10, precision)
 }
