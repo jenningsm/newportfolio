@@ -21,7 +21,7 @@ for(var i = 0; i < pages.length; i++){
   for(var j = 0; j < split.length; j++){
     var item
     if(open){
-      item = util.divUnderline(split[j], true, .3).div.style('display' , 'inline-block')
+      item = util.divUnderline(split[j], true, .5).div.style('display' , 'inline-block')
       open = false
     } else {
       item = split[j]
@@ -29,7 +29,15 @@ for(var i = 0; i < pages.length; i++){
     }
     subTitle.content(item)
   }
-  pages[i] = [title, util.flex("row", ["100%", ''])(subTitle)]
+
+  page.splice(0, 2)
+  var body = "<p>" + page.join("</p><p>") + "</p>"
+
+  pages[i] = [title,
+              new Element().content(
+                util.flex("row", ["100%", ''])(subTitle).style('margin', '30px 0 25px 0'),
+                body
+              )]
 }
 
 module.exports = templates.selectionPage("PROJECTS", pages)

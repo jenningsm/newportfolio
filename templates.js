@@ -6,7 +6,7 @@ var util = require('./util.js')
 var xsvg = require('./x.js')
 
 var pageWidth = "60%"
-var pageMargin = "40px"
+var pageMargin = "50px"
 var pageStyle = {
   'width' : pageWidth,
   'margin' : pageMargin + ' auto',
@@ -26,6 +26,12 @@ function page(title, body){
   )
 }
 
+/*
+  options is an array consisting of each of option a user can click on
+
+  each element is an array whose first element is the title and the second
+  element is the content
+*/
 module.exports.selectionPage = function(title, options){
   var selection = util.flex("row", ["100%", ''])
   for(var i = 0; i < options.length; i++){
@@ -52,7 +58,7 @@ module.exports.selectionPage = function(title, options){
   var body = new Element('div').style('width', '100%')
   .content(
     selection(),
-    options[0][1].style('margin', '20px 0')
+    options[1][1]
   )
 
   return page(title, body)
