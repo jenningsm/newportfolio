@@ -125,6 +125,7 @@ module.exports.divUnderline = function(text, active, thickness, color){
   return {'div' : div, "underline" : underline}
 }
 
+module.exports.truncate = truncate
 function truncate(number, precision){
   number = number * Math.pow(10, precision)
   number = Math.round(number)

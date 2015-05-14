@@ -2,9 +2,8 @@
 function parallaxInit(){
   var ratio = pbr.parallax.ratio
 
-  function setupParallax(img, container){
+  function setupParallax(img, container, offset){
     var bounds
-
 
     function getScroll(){
       return window.pageYOffset
@@ -15,7 +14,6 @@ function parallaxInit(){
       var scrollTop = getScroll()
       bounds = [scrollTop + bb.top, scrollTop + bb.bottom]
     }
-    getBounds()
  
     function transform(dist){
       return "translate3d(0," + dist + "px,0)"
@@ -24,8 +22,9 @@ function parallaxInit(){
     function parallax(){
       var position = getScroll() 
     
-      if(position < bounds[1] && position > bounds[0] - viewportHeight){
-        img.style.transform = transform((position + (viewportHeight / 2) - ((bounds[0] + bounds[1]) / 2)) * ratio)
+      var lookAhead = 70
+      if(position - lookAhead < bounds[1] && position + lookAhead > bounds[0] - viewportHeight){
+        img.style.transform = transform((bounds[1] - bounds[0]) * offset + (position + (viewportHeight / 2) - ((bounds[0] + bounds[1]) / 2)) * ratio)
       }
     }
   
@@ -44,11 +43,13 @@ function parallaxInit(){
     window.addEventListener('bodyChange', parallax)
     resizeListener(getBounds)
     resizeListener(parallax)
+
+    getBounds()
   }
   
   for(var i = 0; i < pbr.parallax.bulks.length; i++){
     var bulk = pbr.parallax.bulks[i]
-    setupParallax(bulk.image.get(), bulk.container.get())
+    setupParallax(bulk.image.get(), bulk.container.get(), bulk.offset)
   }
 }
 

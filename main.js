@@ -28,21 +28,21 @@ var body = new Element('body').style({
 
 var head = require('./components/head.js')
 
-var headerHeight = 16
+var headerHeight = .16
 var items = [['ABOUT', 'about'], ['EXPERIENCE'], ['PROJECTS', 'projects'], ['CONTACT', 'contact']]
 
 var header = require('./components/header.js')(items, headerHeight)
 
 var parallaxRatio = .5
 var bulkGen = require('./components/bulk.js')
-var bulk = bulkGen(100 - 2 * headerHeight, ['FRONT-END DEVELOPER', 'READY FOR ACTION'], parallaxRatio)
-var secondBulk = bulkGen(50, ['TESTING'], parallaxRatio)
+var bulk = bulkGen(1 - 2 * headerHeight, ['FRONT-END DEVELOPER', 'READY FOR ACTION'], parallaxRatio)
+var secondBulk = bulkGen(.5, ['TESTING'], parallaxRatio, -.1)
 
 var tagline = new Element('span').content("SEE WHAT I CAN DO")
 .style('padding', '20px')
 
 //the bottom part of the viewport at the top of the page
-var frontBottom = flex("row", ["100%", headerHeight + "%"])(
+var frontBottom = flex("row", ["100%", 100 * headerHeight + "%"])(
   xsvg('17px'), 0,
   tagline, 0,
   xsvg('17px'), 0
@@ -59,14 +59,14 @@ html.content(
   head,
   body.content(
     header,
-    bulk.div,
+    bulk.container,
     frontBottom,
     sun,
     sections.about,
     sun,
     sections.projects,
     sun.style('margin-bottom', '30px'),
-    secondBulk.div,
+    secondBulk.container,
     new Element('div').style('height', '100%'),
     scripts
   )
@@ -75,7 +75,7 @@ html.content(
 var p = html.generate({
   'sections' : sections,
   'parallax' : {
-    'bulks' : [{'image' : bulk.img, 'container' : bulk.div}, {'image' : secondBulk.img, 'container' : secondBulk.div}],
+    'bulks' : [bulk, secondBulk],
     'ratio' : parallaxRatio
   }
 },true);

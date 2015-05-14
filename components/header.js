@@ -11,7 +11,7 @@ var divUnderline = util.divUnderline
   The very top of the page
 
   items: the menu items
-  height: height of the header
+  height: height of the header as a proportion of the viewport
 */
 
 module.exports = function(items, height){
@@ -59,7 +59,7 @@ module.exports = function(items, height){
   inside(menus[1]())
 
   //the whole thing centered inside a flex box
-  var full = flex('row', ["100%", height + '%'])
+  var full = flex('row', ["100%", 100 * height + '%'])
   var whole = full(inside())
 
   whole.style(
