@@ -24,6 +24,7 @@ function parallaxInit(){
     
       var lookAhead = 70
       if(position - lookAhead < bounds[1] && position + lookAhead > bounds[0] - viewportHeight){
+        console.log(position, bounds)
         img.style.transform = transform((bounds[1] - bounds[0]) * offset + (position + (viewportHeight / 2) - ((bounds[0] + bounds[1]) / 2)) * ratio)
       }
     }
@@ -38,13 +39,17 @@ function parallaxInit(){
       window.addEventListener('resize', onResize)
     }
 
+    function boundsAndParallax(){
+      getBounds()
+      parallax()
+    }
+
     window.addEventListener('scroll', parallax)
-    window.addEventListener('bodyChange', getBounds)
-    window.addEventListener('bodyChange', parallax)
-    resizeListener(getBounds)
-    resizeListener(parallax)
+    window.addEventListener('bodyChange', boundsAndParallax)
+    resizeListener(boundsAndParallax)
 
     getBounds()
+    window.onload = getBounds
   }
   
   for(var i = 0; i < pbr.parallax.bulks.length; i++){
