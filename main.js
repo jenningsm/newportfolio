@@ -34,8 +34,9 @@ var items = [['ABOUT', 'about'], ['EXPERIENCE'], ['PROJECTS', 'projects'], ['CON
 var header = require('./components/header.js')(items, headerHeight)
 
 var parallaxRatio = .5
-var bulk = require('./components/bulk.js')(headerHeight, parallaxRatio)
-
+var bulkGen = require('./components/bulk.js')
+var bulk = bulkGen(100 - 2 * headerHeight, ['FRONT-END DEVELOPER', 'READY FOR ACTION'], parallaxRatio)
+var secondBulk = bulkGen(20, ['TESTING'], parallaxRatio)
 
 var tagline = new Element('span').content("SEE WHAT I CAN DO")
 .style('padding', '20px')
@@ -65,6 +66,7 @@ html.content(
     sun,
     sections.projects,
     sun.style('margin-bottom', '30px'),
+    secondBulk.div,
     scripts
   )
 )
