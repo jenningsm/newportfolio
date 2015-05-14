@@ -1,7 +1,7 @@
 
 function setupParallax(){
 
-  var img = pbr.parallax.img()
+  var img = pbr.parallax.img.get()
   var ratio = pbr.parallax.ratio
   var bottom = pbr.parallax.bottom
   

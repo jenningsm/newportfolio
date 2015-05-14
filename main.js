@@ -15,6 +15,7 @@ var scripts = [
   new Element('script', 'src', 'cs/motion.js'),
   new Element('script', 'src', 'cs/move.js'),
   new Element('script', 'src', 'cs/sections.js'),
+  new Element('script', 'src', 'cs/choiceSections.js'),
 ]
 
 var body = new Element('body').style({
@@ -63,14 +64,18 @@ html.content(
     sections.about,
     sun,
     sections.projects,
+    sun.style('margin-bottom', '30px'),
     scripts
   )
 )
 
 var p = html.generate({
   'sections' : sections,
-   'img' : bulk.img,
-  'parallax' : {'ratio' : parallaxRatio, 'headerHeight' : headerHeight, 'imgHeight' : (100 - 2 * headerHeight) }
+  'parallax' : {
+    'img' : bulk.img,
+    'ratio' : parallaxRatio,
+    'bottom' : 100 - headerHeight
+  }
 },true);
 
 var fs = require('fs');

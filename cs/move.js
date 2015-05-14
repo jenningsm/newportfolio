@@ -61,9 +61,9 @@ MoveGen.prototype.run = function(){
         requestAnimationFrame(transition)
       } else {
         this.mover(this.stop)
-        if(this.callBack !== undefined){
-          var hold = this.callBack
-          this.callBack = undefined
+        if(this.callback !== undefined){
+          var hold = this.callback
+          this.callback = undefined
           hold()
         }
       }
@@ -71,7 +71,7 @@ MoveGen.prototype.run = function(){
   }
   transition = transition.bind(this)
 
-  this.mover(0)
+  this.mover(this.start)
   requestAnimationFrame(transition);
   
 }

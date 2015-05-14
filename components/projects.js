@@ -29,10 +29,10 @@ for(var i = 0; i < pages.length; i++){
     description.content(new Element('p').content(linkify(page[j])))
   }
 
-  pages[i] = [title, description]
+  pages[i] = [pages[i], title, description]
 }
 
-module.exports = templates.selectionPage("PROJECTS", pages)
+module.exports = templates.selectionPage(['projects', "PROJECTS"], pages)
 
 
 

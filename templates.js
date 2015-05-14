@@ -40,11 +40,12 @@ function page(title, body){
   bar, and its content  
 
   the options argument is an array containing all the options. Each option
-  is an array whose first member is the name and second member is the content
-  for the option
+  is an array whose first member is the reference name of the option, whose
+  second member is the display name if the option and whose third member is 
+  the content for the option
 */
-module.exports.selectionPage = function(title, options){
 
+module.exports.selectionPage = function(title, options){
   var middle = Math.floor((options.length - 1) / 2)
 
   //menu bar
@@ -61,10 +62,10 @@ module.exports.selectionPage = function(title, options){
       displayUnderline = true
 
     menu(
-      util.divUnderline(options[i][0], displayUnderline).div.style({
+      util.divUnderline(options[i][1], displayUnderline).div.style({
         'width' : '0',
         'text-align' : 'center'
-      }),
+      }).attribute("onclick", "choose('" + title[0] + "','" + options[i][0] + "')"),
     1)
 
     if(i !== options.length - 1)
@@ -73,20 +74,32 @@ module.exports.selectionPage = function(title, options){
   }
 
   var bodies = []
+  var choices = {}
   for(var i = 0; i < options.length; i++){
-    var body = new Element('div').content(options[i][1])
-    if(i !== middle)
+    var body = new Element('div').content(options[i][2])
+    if(i !== middle){
       body.style('display', 'none')
+    } 
+
+    body.style('overflow', 'hidden')
+    choices[options[i][0]] = body
 
     bodies.push(body)
   }
 
-  return page(title,
+  var container = new Element('div').content(bodies).style('position', 'relative')
+
+  return page(title[1],
     new Element('div').style('width', '100%')
     .content(
       menu(),
-      new Element('div').content(bodies)
+      container
     )
   )
+  .share({
+    'first' : options[middle][0],
+    'choices' : choices,
+    'container' : container
+  })
 
 }

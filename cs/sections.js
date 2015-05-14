@@ -4,7 +4,7 @@ var keys = Object.keys(pbr.sections)
 var sections = {}
 
 for(var i = 0; i < keys.length; i++){
-  sections[keys[i]] = pbr.sections[keys[i]]()
+  sections[keys[i]] = pbr.sections[keys[i]].get()
 }
 
 function pageMover(position){
