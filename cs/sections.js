@@ -35,7 +35,7 @@ function toSection(section){
 
   new MoveGen(pageMover, 1)
   .ends(start, target)
-  .acceleration(1, 1, .5)
+  .acceleration(1, 1, .4)
   .run()
 }
 

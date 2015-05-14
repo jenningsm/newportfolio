@@ -10,7 +10,6 @@ var flex = require('../util.js').flex
 module.exports = function(headerHeight, parallaxRatio){
 
   var bulkHeight = 100 - 2 * headerHeight
-
   var imgHeight = 100 * (1 + 2 * (headerHeight * parallaxRatio) / bulkHeight) 
 
   var img = new Element('img', 'src', './clouds.jpg').style({
@@ -22,7 +21,8 @@ module.exports = function(headerHeight, parallaxRatio){
   /* TODO: if the image is not as wide as the container in the browser, we need to add
      client side js to set the width to 100% and the height to auto and negate the min-height*/
 
-  var imgContainer = flex("column", ['100%', '100%'])(img).style('position', 'absolute')
+  var imgContainer = flex("column", ['100%', '100%'])(img)
+      .style('position', 'absolute')
   
   var text = flex("column", ['100%', '100%'])(
     new Element('span').content('FRONT-END DEVELOPER'), 0,
