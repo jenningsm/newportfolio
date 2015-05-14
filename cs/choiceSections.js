@@ -1,3 +1,4 @@
+
 var keys = Object.keys(pbr.sections)
 var choiceSections = {}
 for(var i = 0; i < keys.length; i++){
@@ -32,8 +33,10 @@ function choose(sectionName, choice){
   
     section.container.style.height = fromHeight
   
+    var resizeEvent = new Event('bodyChange')
     function sizer(pos){
       section.container.style.height = pos + "px"
+      window.dispatchEvent(resizeEvent)
     }
     function fader(el){
       return function(pos){

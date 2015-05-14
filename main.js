@@ -36,7 +36,7 @@ var header = require('./components/header.js')(items, headerHeight)
 var parallaxRatio = .5
 var bulkGen = require('./components/bulk.js')
 var bulk = bulkGen(100 - 2 * headerHeight, ['FRONT-END DEVELOPER', 'READY FOR ACTION'], parallaxRatio)
-var secondBulk = bulkGen(20, ['TESTING'], parallaxRatio)
+var secondBulk = bulkGen(50, ['TESTING'], parallaxRatio)
 
 var tagline = new Element('span').content("SEE WHAT I CAN DO")
 .style('padding', '20px')
@@ -67,6 +67,7 @@ html.content(
     sections.projects,
     sun.style('margin-bottom', '30px'),
     secondBulk.div,
+    new Element('div').style('height', '100%'),
     scripts
   )
 )
@@ -74,9 +75,8 @@ html.content(
 var p = html.generate({
   'sections' : sections,
   'parallax' : {
-    'img' : bulk.img,
-    'ratio' : parallaxRatio,
-    'bottom' : 100 - headerHeight
+    'bulks' : [{'image' : bulk.img, 'container' : bulk.div}, {'image' : secondBulk.img, 'container' : secondBulk.div}],
+    'ratio' : parallaxRatio
   }
 },true);
 
