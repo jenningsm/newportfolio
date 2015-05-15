@@ -4,7 +4,8 @@
   simulates newtonian motion, with the input being time and the output being the 
   position of the object moving at that time.
 
-  accel is the acceleration, decel is the deceleration, and maxSpeed is self-explanatory
+  accel is the acceleration, decel is the deceleration, and maxSpeed is the max speed
+  of the motion
 
   they are defined in abstract units are are only important relative to each other
   for example motion(2, 2, 3) will return the same function as motion(4, 4, 6);

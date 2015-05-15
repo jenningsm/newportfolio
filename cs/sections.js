@@ -1,4 +1,9 @@
 
+/*
+  toSection scrolls to a specified section. Each section has a name,
+  and that name is used to specify which section to scroll to.
+*/
+
 var keys = Object.keys(pbr.sections)
 
 var sections = {}
@@ -18,18 +23,20 @@ function pageMover(position){
 //'doneTravelling' event
 var travelling = false
 
+//section is the name of the section we want to travel to
 function toSection(section){
  
-  //where we are scrolling from
+  //the vertical position of where we are scrolling from
   var start = document.body.scrollTop
-  //where we are going to scroll to
+  //the vertical position of where we are going to scroll to
   var target
 
   //if a section has been specified, go to that section,
   //otherwise go to the top of the page
   if(section !== undefined){
  
-    //get the height of the document and viewport
+    //in order to make sure we don't try to scroll past the bottom of the page,
+    //we need to get the height of the document and viewport
     var body = document.body,
         html = document.documentElement;
     var documentHeight = Math.max( body.scrollHeight, body.offsetHeight, 
@@ -41,6 +48,7 @@ function toSection(section){
     var mid = (bounds.top + bounds.bottom) / 2
     
     target = mid - Math.max(viewportHeight, bounds.bottom - bounds.top) / 2
+    //make sure we don't try to scroll past the end of the page
     target = Math.min(target, documentHeight - viewportHeight)
   } else {
     target = 0

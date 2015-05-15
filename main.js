@@ -34,10 +34,11 @@ var items = [['ABOUT', 'about'], ['EXPERIENCE'], ['PROJECTS', 'projects'], ['CON
 
 var header = require('./components/header.js')(items, headerHeight)
 
+//the ratio of image movement to page scrolling
 var parallaxRatio = .5
-var vistaGen = require('./components/vista.js')
-var vista = vistaGen(1 - 2 * headerHeight, ['FRONT-END DEVELOPER', 'READY FOR ACTION'], parallaxRatio)
-var secondBulk = vistaGen(.4, ['TESTING'], parallaxRatio, -.2)
+var vistaGen = require('./components/vista.js')(parallaxRatio)
+var vista = vistaGen(1 - 2 * headerHeight, ['FRONT-END DEVELOPER', 'READY FOR ACTION'])
+var secondBulk = vistaGen(.4, ['TESTING'], -.2)
 
 var tagline = new Element('span').content("SEE WHAT I CAN DO")
 .style('padding', '20px')
@@ -83,8 +84,11 @@ var p = html.generate({
   'sections' : sections,
   'parallax' : {
     'vistas' : [vista, secondBulk],
+    //the ratio of scrolling to image parallax
     'ratio' : parallaxRatio,
+    //the width of the image divided by the height of the image
     'aspectRatio' : 2.263,
+    //the height of the image as a proportion of the viewport height
     'height' : vistaGen()
   },
   'suns' : suns

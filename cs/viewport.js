@@ -1,3 +1,6 @@
+
+//keeps track of the viewport dimensions
+
 var viewportHeight
 var viewportWidth
 

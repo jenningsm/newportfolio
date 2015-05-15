@@ -118,6 +118,8 @@ function parallaxInit(){
   //checks whether the dimensions need to be changed, and changes
   //them for each image if so
   function reorientation(){
+    //pbr.parallax.aspectRatio is the width of the image divided by the height
+    //of the image
     //pbr.parallax.height gives the height of the image as a proportion of the
     //viewport height
 

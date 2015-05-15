@@ -1,4 +1,6 @@
 
+//an object to create newtonian movements
+
 function MoveGen(mover, time){
   this.mover = mover
   this.start = 0
