@@ -39,7 +39,8 @@ module.exports = function(height, text, parallaxRatio, offset){
   var buffer = .5 * (1 - height) * parallaxRatio
 
   var imgHeight = 1 + 2 * buffer / height
-  imgHeight = imgHeight / (1 - 2 * Math.abs(offset))
+  //if the image is offset, it must be bigger in order to fully cover the parallax area
+  imgHeight *= 1 + 2 * Math.abs(offset)
 
   //we want all images to be the same dimensions
   //we need to check if this img is larger than all of the previous

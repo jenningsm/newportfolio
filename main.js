@@ -37,7 +37,7 @@ var header = require('./components/header.js')(items, headerHeight)
 var parallaxRatio = .5
 var vistaGen = require('./components/vista.js')
 var vista = vistaGen(1 - 2 * headerHeight, ['FRONT-END DEVELOPER', 'READY FOR ACTION'], parallaxRatio)
-var secondBulk = vistaGen(.5, ['TESTING'], parallaxRatio, -.1)
+var secondBulk = vistaGen(.4, ['TESTING'], parallaxRatio, -.2)
 
 var tagline = new Element('span').content("SEE WHAT I CAN DO")
 .style('padding', '20px')
