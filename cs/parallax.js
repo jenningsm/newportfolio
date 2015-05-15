@@ -61,11 +61,44 @@ function parallaxInit(){
     window.addEventListener('load', getBounds)
   }
   
+  var images = []
+  var containerHeights = []
+
   for(var i = 0; i < pbr.parallax.bulks.length; i++){
     var bulk = pbr.parallax.bulks[i]
-    var img = bulk.data.image.get()
-    setupParallax(img, bulk.get(), bulk.data.offset)
+    var imgContainer = bulk.data.imageContainer
+    images.push(imgContainer.data.get())
+    containerHeights.push(bulk.data.containerHeight)
+    setupParallax(imgContainer.get(), bulk.get(), bulk.data.offset)
   }
+
+  var fixed = 'height'
+  function reorientation(){
+    var imageHeight = viewportHeight * pbr.parallax.height
+    if(fixed === 'height'){
+      if(viewportWidth > pbr.parallax.aspectRatio * imageHeight){
+        fixed = 'width'
+        for(var i = 0; i < images.length; i++){
+          images[i].style.height = 'auto'
+          images[i].style.minHeight = 'auto'
+          images[i].style.width = '100%' 
+        }
+      }
+    } else if(fixed === 'width'){
+      if(viewportWidth <= pbr.parallax.aspectRatio * imageHeight){
+        fixed = 'height'
+        for(var i = 0; i < images.length; i++){
+          var height = (100 * pbr.parallax.height / containerHeights[i]) + '%'
+          images[i].style.height = height
+          images[i].style.minHeight = height
+          images[i].style.width = 'auto'
+        }
+      }
+    }
+  }
+
+  window.addEventListener('resize', reorientation)
+  window.addEventListener('load', reorientation)
 }
 
 parallaxInit()

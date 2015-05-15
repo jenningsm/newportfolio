@@ -84,7 +84,8 @@ var p = html.generate({
   'parallax' : {
     'bulks' : [bulk, secondBulk],
     'ratio' : parallaxRatio,
-    'aspectRatio' : 2.263
+    'aspectRatio' : 2.263,
+    'height' : bulkGen()
   },
   'suns' : suns
 },true);

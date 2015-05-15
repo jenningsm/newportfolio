@@ -11,6 +11,9 @@ var flex = util.flex
   text: an array containing each row of text to be displayed over the image
   parallaxRatio: the amount the img will move as a ratio of the amount scrolled
   offset: the vertical offset, as a proportion of the image size, of the image
+
+  if this function is called with no arguments, it will return the height of the
+  images it has created so far. This info is needed for the client side code
 */
 
 var imgs = []
@@ -18,6 +21,12 @@ var areaHeights = []
 var maxHeight = 0
 
 module.exports = function(height, text, parallaxRatio, offset){
+
+  //the max height is needed for the client side code
+  //if this function is called with no arguments, return
+  //the maxHeight
+  if(height === undefined)
+    return maxHeight
 
   if(offset === undefined)
     offset = 0
@@ -45,16 +54,16 @@ module.exports = function(height, text, parallaxRatio, offset){
     maxHeight = imgHeight * height
     for(var i = 0; i < imgs.length; i++){
       imgs[i].style({
-        'min-height' : util.truncate(100 * maxHeight / areaHeights[i], 2) + "%",
-        'height' : util.truncate(100 * maxHeight / areaHeights[i], 2) + "%",
+        'min-height' : util.truncate(100 * maxHeight / areaHeights[i], 3) + "%",
+        'height' : util.truncate(100 * maxHeight / areaHeights[i], 3) + "%",
       })
     }
   }
 
   var img = new Element('img', 'src', './clouds.jpg').style({
     'width' : 'auto',
-    'min-height' : util.truncate(100 * imgHeight, 2) + '%',
-    'height' : util.truncate(100 * imgHeight, 2) + "%",
+    'min-height' : util.truncate(100 * imgHeight, 3) + '%',
+    'height' : util.truncate(100 * imgHeight, 3) + "%",
   })
 
   imgs.push(img)
@@ -65,6 +74,7 @@ module.exports = function(height, text, parallaxRatio, offset){
 
   var imgContainer = flex("column", ['100%', '100%'])(img)
       .style('position', 'absolute')
+      .share(img)
   
   var textBox = flex("column", ['100%', '100%'])
   for(var i = 0; i < text.length; i++){
@@ -82,16 +92,15 @@ module.exports = function(height, text, parallaxRatio, offset){
   var bulk = new Element('div')
   .content(imgContainer, textBox)
   .style(
-    styles.dims('100%', util.truncate(100 * height, 2) + '%'),
+    styles.dims('100%', util.truncate(100 * height, 3) + '%'),
     {'position' : 'relative',
      'border-top' : border,
      'border-bottom' : border,
      'box-sizing' : 'border-box',
      'overflow' : 'hidden'}
   )
-  .share({'image' : imgContainer, 'offset' : offset})
+  .share({'imageContainer' : imgContainer, 'containerHeight' : height, 'offset' : offset})
 
   return bulk
-//  return {'image' : imgContainer, 'container' : bulk, 'offset' : offset}
 
 }
