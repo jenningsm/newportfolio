@@ -80,7 +80,7 @@ function parallaxInit(){
 
     //initialize the bounds
     getBounds()
-    window.addEventListener('load', getBounds)
+    window.addEventListener('load', boundsAndParallax)
   }
   
   var images = []
