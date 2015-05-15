@@ -154,8 +154,14 @@ module.exports.linkedParagraphs = function(paragraphs){
 }
 
 /*
-   Looks for instances of '$(whatever)' inside text replaces
-   them with links
+   Looks for instances of
+
+     '$(link text,www.linkurl.com)' or
+     '$(link text,@sectionName)
+
+   inside text and replaces them with links that either
+   go to the specified url or that cause the page to scroll
+   to the specified section
 
    Returns an array containing the text and link spans
 */
@@ -171,7 +177,20 @@ function linkify(text){
   for(var j = 0; j < split.length; j++){
     var item
     if(open){
-      item = spanUnderline(split[j], .5)
+      var info = split[j].split(',')
+      item = spanUnderline(info[0], .5)
+      if(info[1].indexOf('@') === -1){
+        item = new Element('a')
+        .content(item)
+        .style({
+          'text-decoration' : 'none',
+          'outline' : 'none',
+          'color' : 'inherit'
+        })
+        .attribute('href', info[1])
+      } else {
+        item.attribute('onclick', 'toSection(&quot;' + info[1].substr(1) + "&quot;)")
+      }
       open = false
     } else {
       item = split[j]
