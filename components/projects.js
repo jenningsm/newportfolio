@@ -16,16 +16,8 @@ module.exports = function(name){
     var option = getContent("projects/" + options[i])
     var title = option[0]
   
-    var content = new Element('div')
-  
-    //for each paragraph, insert links and put inside a p tag
-    for(var j = 1; j < option.length; j++){
-      content.content(
-        new Element('p').content(
-          util.linkify(option[j])
-        )
-      )
-    }
+    var optionContent = new Element('div')
+    .content(util.linkedParagraphs(option.slice(1)))
   
     options[i] = {
       //the name of the option
@@ -33,7 +25,7 @@ module.exports = function(name){
       //the title of the option, to appear in the menu
       'title'   : title,
       //the option's content
-      'content' : content
+      'content' : optionContent
     }
   }
   

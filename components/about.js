@@ -2,10 +2,11 @@
 var Element = require('/home/mjennings/pagebuilder/html.js')
 var templates = require('../templates.js')
 var content = require('../content.js')
+var util = require('../util.js')
 
 module.exports = function(name){
   var body = new Element('div')
-  .content("<p>" + content("about").join("</p><p>") + "</p>")
+  .content(util.linkedParagraphs(content("about")))
 
   return templates.section("ABOUT ME", body)
 }

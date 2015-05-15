@@ -136,12 +136,30 @@ function truncate(number, precision){
 }
 
 /*
+   Takes an array of strings, each of which is interpreted
+   as a paragraph.
+
+   For each paragraph, links are substituted according to the
+   convention described in linkify below, and the the whole
+   paragraph is wrapped in a p tag
+
+   returns an array of the formatted paragraphs
+*/
+module.exports.linkedParagraphs = function(paragraphs){
+  var ret = []
+  for(var i = 0; i < paragraphs.length; i++){
+    ret.push(new Element('p').content(linkify(paragraphs[i])))
+  }
+  return ret
+}
+
+/*
    Looks for instances of '$(whatever)' inside text replaces
    them with links
 
-   Returns an array containing the text and links
+   Returns an array containing the text and link spans
 */
-module.exports.linkify = function(text){
+function linkify(text){
   split = text.split(/[(\$\()\)]/).filter(function(e) { return e })
 
   var ret = []
@@ -163,3 +181,4 @@ module.exports.linkify = function(text){
   }
   return ret
 }
+
