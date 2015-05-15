@@ -7,18 +7,17 @@ var xsvg = require('./graphics/x.js')
 
 
 /*
-  page takes a title (e.g. "ABOUT") and the main content for
-  that page (called 'body') and returns an element for that page
+  section takes a title (e.g. "ABOUT") and the main content for
+  that section (called 'body') and returns an element for that page
 */
 
 var sectionWidth = "60%"
 
 //the vertical margins at the top and bottom of the page
-var sectionMargin = "50px"
 var sectionStyle = {
   'width' : sectionWidth,
-  'margin' : sectionMargin + ' auto',
   'font-size' : '1.3em',
+  'margin' : '0 auto',
   'text-align' : 'justify'}
 
 module.exports.section = section
@@ -29,7 +28,7 @@ function section(title, body){
       util.divUnderline(title).div
       .style(styles.font("2.5em"))
     ),
-    body.style('margin', sectionMargin + ' 0'),
+    body.style('margin', '50px 0'),
     util.flex("row")(util.divUnderline("Back to top", true, .5).div.attribute("onclick", "toSection()"))
   )
 }

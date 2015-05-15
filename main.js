@@ -51,13 +51,14 @@ vistas.push(
 
            /*  ---------- THE SUNS ------------ */
 
+var vertMargin = '50px'
 var sunGen = require('./graphics/sun.js')
 var suns = []
 for(var i = 0; i < 3; i++){
   var sun = sunGen('50px')
-  suns.push(flex("row", ['100%', ''])(sun).share(sun))
+  suns.push(flex("row", ['100%', ''])(sun).share(sun).style('margin', vertMargin + ' 0'))
 }
-var sun = flex("row", ['100%', ''])(require('./graphics/sun.js')('50px'))
+suns[0].style('margin', '0 0 ' + vertMargin + ' 0')
 
 
         /* ------------ THE SECTIONS --------------- */
