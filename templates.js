@@ -11,41 +11,33 @@ var xsvg = require('./graphics/x.js')
   that page (called 'body') and returns an element for that page
 */
 
-var pageWidth = "60%"
+var sectionWidth = "60%"
 
 //the vertical margins at the top and bottom of the page
-var pageMargin = "50px"
-var pageStyle = {
-  'width' : pageWidth,
-  'margin' : pageMargin + ' auto',
+var sectionMargin = "50px"
+var sectionStyle = {
+  'width' : sectionWidth,
+  'margin' : sectionMargin + ' auto',
   'font-size' : '1.3em',
   'text-align' : 'justify'}
 
-module.exports.page = page
-function page(title, body){
-  return new Element('div').style(pageStyle)
+module.exports.section = section
+function section(title, body){
+  return new Element('div').style(sectionStyle)
   .content(
     util.flex("row", ["100%", ''])(
       util.divUnderline(title).div
       .style(styles.font("2.5em"))
     ),
-    body.style('margin', pageMargin + ' 0'),
+    body.style('margin', sectionMargin + ' 0'),
     util.flex("row")(util.divUnderline("Back to top", true, .5).div.attribute("onclick", "toSection()"))
   )
 }
 
 /*
-  selection page is for a page that has options a user can click on for
-  different content. Each option has a name, that will appear on the menu
-  bar, and its content  
-
-  the options argument is an array containing all the options. Each option
-  is an array whose first member is the reference name of the option, whose
-  second member is the display name if the option and whose third member is 
-  the content for the option
 */
 
-module.exports.selectionPage = function(title, options){
+module.exports.selectionSection = function(name, title, options){
   var middle = Math.floor((options.length - 1) / 2)
 
   //menu bar
@@ -62,10 +54,10 @@ module.exports.selectionPage = function(title, options){
       displayUnderline = true
 
     menu(
-      util.divUnderline(options[i][1], displayUnderline).div.style({
+      util.divUnderline(options[i].title, displayUnderline).div.style({
         'width' : '0',
         'text-align' : 'center'
-      }).attribute("onclick", "choose('" + title[0] + "','" + options[i][0] + "')"),
+      }).attribute("onclick", "choose('" + name + "','" + options[i].name + "')"),
     1)
 
     if(i !== options.length - 1)
@@ -76,20 +68,20 @@ module.exports.selectionPage = function(title, options){
   var bodies = []
   var choices = {}
   for(var i = 0; i < options.length; i++){
-    var body = new Element('div').content(options[i][2])
+    var body = new Element('div').content(options[i].content)
     if(i !== middle){
       body.style('display', 'none')
     } 
 
     body.style('overflow', 'hidden')
-    choices[options[i][0]] = body
+    choices[options[i].name] = body
 
     bodies.push(body)
   }
 
   var container = new Element('div').content(bodies).style('position', 'relative')
 
-  return page(title[1],
+  return section(title,
     new Element('div').style('width', '100%')
     .content(
       menu(),
@@ -97,7 +89,7 @@ module.exports.selectionPage = function(title, options){
     )
   )
   .share({
-    'first' : options[middle][0],
+    'first' : options[middle].name,
     'choices' : choices,
     'container' : container
   })

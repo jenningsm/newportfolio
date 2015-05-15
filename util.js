@@ -52,7 +52,8 @@ var thicknessStandard = 4
   thickness: the thickness of the underline as a proportion of thicknessStandard
   color: the color of the underline
 */
-module.exports.spanUnderline = function(text, thickness, color){
+module.exports.spanUnderline = spanUnderline
+function spanUnderline(text, thickness, color){
   if(color === undefined)
     color = colors.pString
 
@@ -132,4 +133,33 @@ function truncate(number, precision){
   number = number * Math.pow(10, precision)
   number = Math.round(number)
   return number / Math.pow(10, precision)
+}
+
+/*
+   Looks for instances of '$(whatever)' inside text replaces
+   them with links
+
+   Returns an array containing the text and links
+*/
+module.exports.linkify = function(text){
+  split = text.split(/[(\$\()\)]/).filter(function(e) { return e })
+
+  var ret = []
+
+  var open = false
+  if(text.indexOf('$') === 0)
+    open = true
+
+  for(var j = 0; j < split.length; j++){
+    var item
+    if(open){
+      item = spanUnderline(split[j], .5)
+      open = false
+    } else {
+      item = split[j]
+      open = true
+    }
+    ret.push(item)
+  }
+  return ret
 }

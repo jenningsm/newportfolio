@@ -3,7 +3,9 @@ var Element = require('/home/mjennings/pagebuilder/html.js')
 var templates = require('../templates.js')
 var content = require('../content.js')
 
-var body = new Element('div')
-.content("<p>" + content("about").join("</p><p>") + "</p>")
+module.exports = function(name){
+  var body = new Element('div')
+  .content("<p>" + content("about").join("</p><p>") + "</p>")
 
-module.exports = templates.page("ABOUT ME", body)
+  return templates.section("ABOUT ME", body)
+}

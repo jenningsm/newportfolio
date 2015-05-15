@@ -8,6 +8,69 @@ var flex = require('./util.js').flex
 var html = new Element('html').style(
   {'margin' : '0', 'padding' : '0'}
 )
+var body = new Element('body').style({
+ 'margin' : '0',
+ 'padding' : '0',
+ 'font-family' : "'Open Sans Condensed', sans serif",
+ 'font-weight' : '400', 
+ 'text-align' : 'center'
+})
+
+/*
+  sectionsInfo contains the following information for each section:
+
+    name: the name which the client side code uses to reference that section
+    menuTitle: the title that will appear in that section's entry in the main
+               menu. If menuTitle is undefined, that section will not appear
+               in the main menu
+*/
+var sectionsInfo = [
+  {'name' : 'about', 'menuTitle' : 'ABOUT'}, 
+  {'name' : 'experience', 'menuTitle' : 'EXPERIENCE', 'notDone' : true}, 
+  {'name' : 'projects', 'menuTitle' : 'PROJECTS'}, 
+  {'name' : 'contact', 'menuTitle' : 'CONTACT', 'notDone' : true} 
+]
+
+//the height, as a proportion of the viewport height, of the header bar
+var headerHeight = .16
+//the ratio of image movement to page scrolling
+var parallaxRatio = .5
+
+
+         /*  -----------  THE VISTAS   ----------  */
+
+var vistaGen = require('./components/vista.js')(parallaxRatio)
+var vistas = []
+vistas.push(
+  vistaGen(1 - 2 * headerHeight, ['FRONT-END DEVELOPER', 'READY FOR ACTION'])
+)
+vistas.push(
+  vistaGen(.4, ['TESTING'], -.2)
+)
+
+
+           /*  ---------- THE SUNS ------------ */
+
+var sunGen = require('./graphics/sun.js')
+var suns = []
+for(var i = 0; i < 3; i++){
+  var sun = sunGen('50px')
+  suns.push(flex("row", ['100%', ''])(sun).share(sun))
+}
+var sun = flex("row", ['100%', ''])(require('./graphics/sun.js')('50px'))
+
+
+        /* ------------ THE SECTIONS --------------- */
+
+var sections = {}
+for(var i = 0; i < sectionsInfo.length; i++){
+  if(sectionsInfo[i].notDone === undefined){
+    var name = sectionsInfo[i].name
+    sections[name] = require('./components/' + name + '.js')(name)
+  }
+}
+
+        /* ------------- THE SCRIPTS --------------- */
 
 var scripts = [
   new Element('script', 'src', 'cs/viewport.js'),
@@ -19,62 +82,21 @@ var scripts = [
   new Element('script', 'src', 'cs/sun.js'),
 ]
 
-var body = new Element('body').style({
- 'margin' : '0',
- 'padding' : '0',
- 'font-family' : "'Open Sans Condensed', sans serif",
- 'font-weight' : '400', 
- 'text-align' : 'center'
-})
 
-var head = require('./components/head.js')
-
-var headerHeight = .16
-var items = [['ABOUT', 'about'], ['EXPERIENCE'], ['PROJECTS', 'projects'], ['CONTACT', 'contact']]
-
-var header = require('./components/header.js')(items, headerHeight)
-
-//the ratio of image movement to page scrolling
-var parallaxRatio = .5
-var vistaGen = require('./components/vista.js')(parallaxRatio)
-var vista = vistaGen(1 - 2 * headerHeight, ['FRONT-END DEVELOPER', 'READY FOR ACTION'])
-var secondBulk = vistaGen(.4, ['TESTING'], -.2)
-
-var tagline = new Element('span').content("SEE WHAT I CAN DO")
-.style('padding', '20px')
-
-//the bottom part of the viewport at the top of the page
-var frontBottom = flex("row", ["100%", 100 * headerHeight + "%"])(
-  xsvg('17px'), 0,
-  tagline, 0,
-  xsvg('17px'), 0
-).style(
-  styles.font("3.75vmin", "400", "'Open Sans Condensed'")
-)
-
-var sunGen = require('./graphics/sun.js')
-var suns = []
-for(var i = 0; i < 3; i++){
-  var sun = sunGen('50px')
-  suns.push(flex("row", ['100%', ''])(sun).share(sun))
-}
-var sun = flex("row", ['100%', ''])(require('./graphics/sun.js')('50px'))
-
-var sections = { 'about' : require('./components/about.js'),
-                 'projects' : require('./components/projects.js')}
+/* ---------------- THE WHOLE SHEBANG ----------------- */
 
 html.content(
-  head,
+  require('./components/head.js'),
   body.content(
-    header,
-    vista,
-    frontBottom,
+    require('./components/header.js')(sectionsInfo, headerHeight),
+    vistas[0],
+    require('./components/frontBottom.js')(headerHeight),
     suns[0],
     sections.about,
     suns[1],
     sections.projects,
     suns[2].style('margin-bottom', '30px'),
-    secondBulk,
+    vistas[1],
     new Element('div').style('height', '100%'),
     scripts
   )
@@ -83,7 +105,7 @@ html.content(
 var p = html.generate({
   'sections' : sections,
   'parallax' : {
-    'vistas' : [vista, secondBulk],
+    'vistas' : vistas,
     //the ratio of scrolling to image parallax
     'ratio' : parallaxRatio,
     //the width of the image divided by the height of the image

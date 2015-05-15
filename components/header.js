@@ -18,7 +18,13 @@ var divUnderline = util.divUnderline
   middle flex box contains the cursive initials and golden bars
 */
 
-module.exports = function(items, height){
+module.exports = function(sectionsInfo, height){
+  var items = [];
+  for(var i = 0; i < sectionsInfo.length; i++){
+    if(sectionsInfo[i].menuTitle !== undefined)
+      items.push(sectionsInfo[i])
+  }
+
   //create the two menus, the one on the left and the one on the right
   var menus = []
   for(var i = 0; i < 2; i++){
@@ -27,7 +33,7 @@ module.exports = function(items, height){
     for(var j = 0; j < items.length / 2; j++){
       var item = items[i * (items.length/2) + j]
 
-      menus[i](util.divUnderline(item[0], false).div.attribute('onclick', 'toSection(&quot;' + item[1] + '&quot;)'))
+      menus[i](util.divUnderline(item.menuTitle, false).div.attribute('onclick', 'toSection(&quot;' + item.name + '&quot;)'))
 
       if(j !== (items.length / 2) - 1)
         menus[i](xsvg('17px'))
