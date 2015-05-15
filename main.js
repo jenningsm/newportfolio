@@ -35,9 +35,9 @@ var items = [['ABOUT', 'about'], ['EXPERIENCE'], ['PROJECTS', 'projects'], ['CON
 var header = require('./components/header.js')(items, headerHeight)
 
 var parallaxRatio = .5
-var bulkGen = require('./components/bulk.js')
-var bulk = bulkGen(1 - 2 * headerHeight, ['FRONT-END DEVELOPER', 'READY FOR ACTION'], parallaxRatio)
-var secondBulk = bulkGen(.5, ['TESTING'], parallaxRatio, -.1)
+var vistaGen = require('./components/vista.js')
+var vista = vistaGen(1 - 2 * headerHeight, ['FRONT-END DEVELOPER', 'READY FOR ACTION'], parallaxRatio)
+var secondBulk = vistaGen(.5, ['TESTING'], parallaxRatio, -.1)
 
 var tagline = new Element('span').content("SEE WHAT I CAN DO")
 .style('padding', '20px')
@@ -66,7 +66,7 @@ html.content(
   head,
   body.content(
     header,
-    bulk,
+    vista,
     frontBottom,
     suns[0],
     sections.about,
@@ -82,10 +82,10 @@ html.content(
 var p = html.generate({
   'sections' : sections,
   'parallax' : {
-    'bulks' : [bulk, secondBulk],
+    'vistas' : [vista, secondBulk],
     'ratio' : parallaxRatio,
     'aspectRatio' : 2.263,
-    'height' : bulkGen()
+    'height' : vistaGen()
   },
   'suns' : suns
 },true);

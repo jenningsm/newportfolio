@@ -5,11 +5,12 @@ var util = require('../util.js')
 var flex = util.flex
 
 /*
-  The main picture area at the top of the page
+  a vista is a large image area with text overlayed on top of it and an image
+  ready to be parallaxed
 
-  height: height of the area, as a proportion of the viewport
+  height: height of the vista, as a proportion of the viewport
   text: an array containing each row of text to be displayed over the image
-  parallaxRatio: the amount the img will move as a ratio of the amount scrolled
+  parallaxRatio: the amount the image will move as a ratio of the amount scrolled
   offset: the vertical offset, as a proportion of the image size, of the image
 
   if this function is called with no arguments, it will return the height of the
@@ -74,7 +75,6 @@ module.exports = function(height, text, parallaxRatio, offset){
 
   var imgContainer = flex("column", ['100%', '100%'])(img)
       .style('position', 'absolute')
-      .share(img)
   
   var textBox = flex("column", ['100%', '100%'])
   for(var i = 0; i < text.length; i++){
@@ -89,7 +89,7 @@ module.exports = function(height, text, parallaxRatio, offset){
 
   var border = '4px solid ' + color.pString
 
-  var bulk = new Element('div')
+  var vista = new Element('div')
   .content(imgContainer, textBox)
   .style(
     styles.dims('100%', util.truncate(100 * height, 3) + '%'),
@@ -99,8 +99,13 @@ module.exports = function(height, text, parallaxRatio, offset){
      'box-sizing' : 'border-box',
      'overflow' : 'hidden'}
   )
-  .share({'imageContainer' : imgContainer, 'containerHeight' : height, 'offset' : offset})
+  .share({
+    'imageContainer' : imgContainer,
+    'image' : img,
+    'vistaContainerHeight' : height, 
+    'offset' : offset
+  })
 
-  return bulk
+  return vista
 
 }
