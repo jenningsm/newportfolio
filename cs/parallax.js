@@ -48,7 +48,7 @@ function parallaxInit(){
     resizeListener(boundsAndParallax)
 
     getBounds()
-    window.onload = getBounds
+    window.addEventListener('load', getBounds)
   }
   
   for(var i = 0; i < pbr.parallax.bulks.length; i++){

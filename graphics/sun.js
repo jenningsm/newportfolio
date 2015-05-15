@@ -38,6 +38,6 @@ module.exports = function(size, numPoints, skips, lineWidth){
     }
   }
 
-  return sun()
+  return sun().style('opacity', 0)
 }
 

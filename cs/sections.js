@@ -11,6 +11,8 @@ function pageMover(position){
   window.scrollTo(0, position)
 }
 
+var travelling = false
+
 function toSection(section){
 
   var start = document.body.scrollTop
@@ -33,9 +35,17 @@ function toSection(section){
     target = 0
   }
 
+
+  travelling = true
+  function doneTravelling(){
+    travelling = false
+    window.dispatchEvent(new Event('doneTravelling'))
+  }
+
   new MoveGen(pageMover, 1)
   .ends(start, target)
   .acceleration(1, 1, .4)
+  .callback(doneTravelling)
   .run()
 }
 

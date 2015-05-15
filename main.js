@@ -16,6 +16,7 @@ var scripts = [
   new Element('script', 'src', 'cs/move.js'),
   new Element('script', 'src', 'cs/sections.js'),
   new Element('script', 'src', 'cs/choiceSections.js'),
+  new Element('script', 'src', 'cs/sun.js'),
 ]
 
 var body = new Element('body').style({
@@ -50,6 +51,12 @@ var frontBottom = flex("row", ["100%", 100 * headerHeight + "%"])(
   styles.font("3.75vmin", "400", "'Open Sans Condensed'")
 )
 
+var sunGen = require('./graphics/sun.js')
+var suns = []
+for(var i = 0; i < 3; i++){
+  var sun = sunGen('50px')
+  suns.push(flex("row", ['100%', ''])(sun).share(sun))
+}
 var sun = flex("row", ['100%', ''])(require('./graphics/sun.js')('50px'))
 
 var sections = { 'about' : require('./components/about.js'),
@@ -61,11 +68,11 @@ html.content(
     header,
     bulk,
     frontBottom,
-    sun,
+    suns[0],
     sections.about,
-    sun,
+    suns[1],
     sections.projects,
-    sun.style('margin-bottom', '30px'),
+    suns[2].style('margin-bottom', '30px'),
     secondBulk,
     new Element('div').style('height', '100%'),
     scripts
@@ -77,7 +84,8 @@ var p = html.generate({
   'parallax' : {
     'bulks' : [bulk, secondBulk],
     'ratio' : parallaxRatio
-  }
+  },
+  'suns' : suns
 },true);
 
 var fs = require('fs');

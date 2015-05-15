@@ -7,7 +7,6 @@ function MoveGen(mover, time){
 
   this.accel = 1
   this.decel = 1
-  this.maxSpeed = 0
 
   this.interrupted = false
 }
@@ -25,9 +24,6 @@ MoveGen.prototype.ends = function(first, second){
 MoveGen.prototype.acceleration = function(accel, decel, maxSpeed){
   if(decel === undefined)
     decel = accel
-
-  if(maxSpeed === undefined)
-    maxSpeed = 0
 
   this.accel = accel
   this.decel = decel
