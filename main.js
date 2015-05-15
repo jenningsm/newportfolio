@@ -59,14 +59,14 @@ html.content(
   head,
   body.content(
     header,
-    bulk.container,
+    bulk,
     frontBottom,
     sun,
     sections.about,
     sun,
     sections.projects,
     sun.style('margin-bottom', '30px'),
-    secondBulk.container,
+    secondBulk,
     new Element('div').style('height', '100%'),
     scripts
   )

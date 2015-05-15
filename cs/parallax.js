@@ -24,7 +24,6 @@ function parallaxInit(){
     
       var lookAhead = 70
       if(position - lookAhead < bounds[1] && position + lookAhead > bounds[0] - viewportHeight){
-        console.log(position, bounds)
         img.style.transform = transform((bounds[1] - bounds[0]) * offset + (position + (viewportHeight / 2) - ((bounds[0] + bounds[1]) / 2)) * ratio)
       }
     }
@@ -54,7 +53,7 @@ function parallaxInit(){
   
   for(var i = 0; i < pbr.parallax.bulks.length; i++){
     var bulk = pbr.parallax.bulks[i]
-    setupParallax(bulk.image.get(), bulk.container.get(), bulk.offset)
+    setupParallax(bulk.data.image.get(), bulk.get(), bulk.data.offset)
   }
 }
 

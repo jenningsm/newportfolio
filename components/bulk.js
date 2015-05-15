@@ -89,7 +89,9 @@ module.exports = function(height, text, parallaxRatio, offset){
      'box-sizing' : 'border-box',
      'overflow' : 'hidden'}
   )
+  .share({'image' : imgContainer, 'offset' : offset})
 
-  return {'image' : imgContainer, 'container' : bulk, 'offset' : offset}
+  return bulk
+//  return {'image' : imgContainer, 'container' : bulk, 'offset' : offset}
 
 }
