@@ -39,7 +39,9 @@ module.exports = templates.selectionPage(['projects', "PROJECTS"], pages)
 /////////////////////////////////////////////////
 
 /*
-   Looks for '$(whatever)' inside a chnages them to links
+   Looks for instances of '$(whatever)' inside text replaces
+   them with links
+
    Returns an array containing the text and links
 */
 function linkify(text){

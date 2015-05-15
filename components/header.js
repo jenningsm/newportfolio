@@ -12,6 +12,10 @@ var divUnderline = util.divUnderline
 
   items: the menu items
   height: height of the header as a proportion of the viewport
+
+  the header is a flex box which itself contains three flex boxes.
+  the first and last of these are the two halves of the menu, and the
+  middle flex box contains the cursive initials and golden bars
 */
 
 module.exports = function(items, height){
@@ -59,14 +63,13 @@ module.exports = function(items, height){
   inside(menus[1]())
 
   //the whole thing centered inside a flex box
-  var full = flex('row', ["100%", 100 * height + '%'])
-  var whole = full(inside())
-
-  whole.style(
+  return flex('row', ["100%", 100 * height + '%'])(
+    inside()
+  )
+  .style(
     {'text-align' : 'center'},
     styles.font('3.75vmin', '400', "'Open Sans Condensed', sans serif")
   )
-  return whole
 } 
   
   

@@ -125,6 +125,8 @@ module.exports.divUnderline = function(text, active, thickness, color){
   return {'div' : div, "underline" : underline}
 }
 
+//truncates a number so it has at most precision number
+//of digits after the decimal point
 module.exports.truncate = truncate
 function truncate(number, precision){
   number = number * Math.pow(10, precision)

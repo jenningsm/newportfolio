@@ -53,8 +53,8 @@ module.exports = function(parallaxRatio){
     //if it is we need to set all the previous heights to this height
     //if not we need to set this height to the max previous height
   
-    //remember that the image height is relative to the area height
-    //so to get the absolute height, we need to times by the area height
+    //remember that the image height is relative to the vista container height
+    //so to get the absolute height, we need to times by the vista container  height
   
     if(maxHeight > height * imgHeight){
       imgHeight = maxHeight / height
@@ -76,9 +76,6 @@ module.exports = function(parallaxRatio){
   
     imgs.push(img)
     areaHeights.push(height)
-  
-    /* TODO: if the image is not as wide as the container in the browser, we need to add
-       client side js to set the width to 100% and the height to auto and negate the min-height*/
   
     var imgContainer = flex("column", ['100%', '100%'])(img)
         .style('position', 'absolute')
