@@ -45,7 +45,7 @@ function toSection(section){
   
     //get the midpoint of the section we are going to
     var bounds = sections[section].getBoundingClientRect()
-    var mid = (bounds.top + bounds.bottom) / 2
+    var mid = window.pageYOffset + (bounds.top + bounds.bottom) / 2
     
     target = mid - Math.max(viewportHeight, bounds.bottom - bounds.top) / 2
     //make sure we don't try to scroll past the end of the page
