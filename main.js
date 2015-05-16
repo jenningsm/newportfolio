@@ -26,7 +26,7 @@ var body = new Element('body').style({
 */
 var sectionsInfo = [
   {'name' : 'about', 'menuTitle' : 'ABOUT'}, 
-  {'name' : 'experience', 'menuTitle' : 'EXPERIENCE', 'notDone' : true}, 
+  {'name' : 'experience', 'menuTitle' : 'EXPERIENCE'}, 
   {'name' : 'projects', 'menuTitle' : 'PROJECTS'}, 
   {'name' : 'contact', 'menuTitle' : 'CONTACT', 'notDone' : true} 
 ]
@@ -55,7 +55,7 @@ vistas.push(
 
 var sunGen = require('./graphics/sun.js')
 var suns = []
-for(var i = 0; i < 3; i++){
+for(var i = 0; i < 5; i++){
   var sun = sunGen('50px')
   suns.push(flex("row", ['100%', ''])(sun).share(sun).style('margin', vertMargin + ' 0'))
 }
@@ -97,8 +97,11 @@ html.content(
     sections.about,
     suns[1],
     sections.projects,
-    suns[2].style('margin-bottom', '30px'),
+    suns[2],
     vistas[1],
+    suns[3],
+    sections.experience,
+    suns[4],
     new Element('div').style('height', '100%'),
     scripts
   )
