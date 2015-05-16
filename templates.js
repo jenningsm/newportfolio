@@ -73,6 +73,7 @@ module.exports.selectionSection = function(name, title, options){
     } 
 
     body.style('overflow', 'hidden')
+    body.style('width', '100%')
     choices[options[i].name] = body
 
     bodies.push(body)

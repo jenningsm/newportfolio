@@ -16,8 +16,11 @@ module.exports = function(name){
     var option = getContent("projects/" + options[i])
     var title = option[0]
   
+    var paragraphs = util.linkedParagraphs(option.slice(1))
+    paragraphs[paragraphs.length-1].style('text-align', 'center')
+
     var optionContent = new Element('div')
-    .content(util.linkedParagraphs(option.slice(1)))
+    .content(paragraphs)
   
     options[i] = {
       //the name of the option
