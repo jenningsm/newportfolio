@@ -21,8 +21,8 @@
      first: the name of the option whose content is displayed at first
      container: the main content container for the section
      choices: {
-       '$(choice X name)' : '$(choice X content container)'
-       '$(choice Y name)' : '$(choice Y content container)'
+       $(choice X name) : $(choice X content container)
+       $(choice Y name) : $(choice Y content container)
            ...
            ...
      }
@@ -65,7 +65,7 @@ for(var i = 0; i < keys.length; i++){
 function choose(sectionName, choice){
   var section = choiceSections[sectionName]
   //if not locked and choice is not already active
-  if(!section.lock && choice !== section.choice){
+  if(!section.lock && choice !== section.current){
     //lock the section so no other transition will take place on this
     //section until this transition has finished
     section.lock = true
@@ -154,6 +154,9 @@ function choose(sectionName, choice){
     first(
       second(
         function (){
+          from.style.position = 'absolute'
+          to.style.position = 'relative'
+          section.container.style.height = 'auto'
           section.current = choice
           section.lock = false
         }
