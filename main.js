@@ -28,8 +28,8 @@ var body = new Element('body').style({
 */
 var sectionsInfo = [
   {'name' : 'about', 'menuTitle' : 'ABOUT'}, 
-  {'name' : 'experience', 'menuTitle' : 'EXPERIENCE'}, 
   {'name' : 'projects', 'menuTitle' : 'PROJECTS'}, 
+  {'name' : 'experience', 'menuTitle' : 'EXPERIENCE'}, 
   {'name' : 'contact', 'menuTitle' : 'CONTACT'} 
 ]
 
@@ -82,7 +82,7 @@ for(var i = 0; i < sectionsInfo.length; i++){
 var photoCredit = new Element('div')
     .style('margin', '20px auto')
     .content(
-      "The background photo for this page was take by the Flickr user ",
+      "The background photo of this page was taken by the Flickr user ",
       util.link("Umnak", "https://www.flickr.com/photos/umnak/14558226377/"),
       "."
     )
