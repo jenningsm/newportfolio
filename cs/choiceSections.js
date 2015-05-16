@@ -114,9 +114,9 @@ function choose(sectionName, choice){
       }
 
       return function(){
-        new MoveGen(sizer, .7)
+        new MoveGen(sizer, .05 * Math.sqrt(Math.abs(toHeight - fromHeight)))
         .ends(fromHeight, toHeight)
-        .acceleration(1, 1, .8)
+        .acceleration(1, 1, .7)
         .callback(callback)
         .run()
       }
