@@ -28,7 +28,7 @@ var sectionsInfo = [
   {'name' : 'about', 'menuTitle' : 'ABOUT'}, 
   {'name' : 'experience', 'menuTitle' : 'EXPERIENCE'}, 
   {'name' : 'projects', 'menuTitle' : 'PROJECTS'}, 
-  {'name' : 'contact', 'menuTitle' : 'CONTACT', 'notDone' : true} 
+  {'name' : 'contact', 'menuTitle' : 'CONTACT'} 
 ]
 
 //the height, as a proportion of the viewport height, of the header bar
@@ -49,13 +49,16 @@ vistas.push(
 vistas.push(
   vistaGen(.4, ['TESTING'], -.2)
 )
+vistas.push(
+  vistaGen(.6, [], -.2)
+)
 
 
            /*  ---------- THE SUNS ------------ */
 
 var sunGen = require('./graphics/sun.js')
 var suns = []
-for(var i = 0; i < 5; i++){
+for(var i = 0; i < 6; i++){
   var sun = sunGen('50px')
   suns.push(flex("row", ['100%', ''])(sun).share(sun).style('margin', vertMargin + ' 0'))
 }
@@ -102,7 +105,9 @@ html.content(
     suns[3],
     sections.experience,
     suns[4],
-    new Element('div').style('height', '100%'),
+    sections.contact,
+    suns[5],
+    vistas[2],
     scripts
   )
 )
