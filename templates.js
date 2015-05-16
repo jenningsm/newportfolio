@@ -16,7 +16,6 @@ var sectionWidth = "60%"
 //the vertical margins at the top and bottom of the page
 var sectionStyle = {
   'width' : sectionWidth,
-  'font-size' : '1.3em',
   'margin' : '0 auto',
   'text-align' : 'justify'}
 

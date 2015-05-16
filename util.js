@@ -178,20 +178,10 @@ function linkify(text){
     var item
     if(open){
       var info = split[j].split(',')
-      item = spanUnderline(info[0], .5)
       if(info[1].indexOf('@') === -1){
-        /*item = new Element('a')
-        .content(item)
-        .style({
-          'text-decoration' : 'none',
-          'outline' : 'none',
-          'color' : 'inherit'
-        })
-        .attribute('href', info[1])*/
-        item = link(item, info[1])
+        item = link(info[0], info[1])
       } else {
-        //item.attribute('onclick', 'toSection(&quot;' + info[1].substr(1) + "&quot;)")
-        item = inLink(item, info[1].substr(1))
+        item = inLink(info[0], info[1].substr(1))
       }
       open = false
     } else {
@@ -203,10 +193,11 @@ function linkify(text){
   return ret
 }
 
-//creates a link to to url of content
-function link(content, url){
+//creates a link with specified text to specified url
+module.exports.link = link
+function link(text, url){
   return new Element('a')
-  .content(content)
+  .content(spanUnderline(text, .5))
   .style({
 
     'text-decoration' : 'none',
@@ -216,8 +207,9 @@ function link(content, url){
   .attribute('href', url)
 }
 
-//makes content into a link to scroll to a specified
-//section within this page
-function inLink(content, section){
-  return content.attribute('onclick', 'toSection(&quot;' + section + '&quot;)')
+//creates a link with the specified text that scrolls 
+//to the specified section when clicked
+module.exports.inLink = inLink
+function inLink(text, section){
+  return spanUnderline(text, .5).attribute('onclick', 'toSection(&quot;' + section + '&quot;)')
 }

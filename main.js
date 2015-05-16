@@ -2,7 +2,8 @@ var Element = require('/home/mjennings/pagebuilder/html.js')
 var styles = require('./styles.js')
 var xsvg = require('./graphics/x.js')
 var color = require('./color.js')
-var flex = require('./util.js').flex
+var util = require('./util.js')
+var flex = util.flex
 
 
 var html = new Element('html').style(
@@ -13,6 +14,7 @@ var body = new Element('body').style({
  'padding' : '0',
  'font-family' : "'Open Sans Condensed', sans serif",
  'font-weight' : '400', 
+ 'font-size' : '1.3em',
  'text-align' : 'center'
 })
 
@@ -47,7 +49,7 @@ vistas.push(
   vistaGen(1 - 2 * headerHeight, ['FRONT-END DEVELOPER', 'READY FOR ACTION'])
 )
 vistas.push(
-  vistaGen(.4, ['TESTING'], -.2)
+  vistaGen(.5, ['TESTING'], -.2)
 )
 vistas.push(
   vistaGen(.6, [], -.2)
@@ -74,6 +76,17 @@ for(var i = 0; i < sectionsInfo.length; i++){
     sections[name] = require('./components/' + name + '.js')(name)
   }
 }
+
+   /* ---------------- PHOTO CREDIT ------------------- */
+
+var photoCredit = new Element('div')
+    .style('margin', '20px auto')
+    .content(
+      "The background photo was take by the Flickr user ",
+      util.link("Umnak", "https://www.flickr.com/photos/umnak/14558226377/"),
+      "."
+    )
+
 
         /* ------------- THE SCRIPTS --------------- */
 
@@ -107,6 +120,7 @@ html.content(
     suns[4],
     sections.contact,
     suns[5],
+    photoCredit,
     vistas[2],
     scripts
   )
