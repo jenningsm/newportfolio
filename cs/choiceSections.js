@@ -21,15 +21,26 @@
      first: the name of the option whose content is displayed at first
      container: the main content container for the section
      choices: {
-       $(choice X name) : $(choice X content container)
-       $(choice Y name) : $(choice Y content container)
+       $(choice X name) : 
+         {
+           'underline' : $(choice X underline)
+           'container' : $(choice X content container)
+         }
+       $(choice Y name) : 
+         {
+           'underline' : $(choice Y underline)
+           'container' : $(choice Y content container)
+         }
            ...
            ...
      }
 
   In case it's not clear, choices is an associative array that maps 
   the name of each choice to the container that contains that choice's
-  content
+  content and that choice's underline
+
+  underline is the element that is the underline for that choice's menu
+  item. 
 
   each container for each options' content is contained within the 
   section's main content container
@@ -51,7 +62,9 @@ for(var i = 0; i < keys.length; i++){
   
     var choiceKeys = Object.keys(section.choices)
     for(var j = 0; j < choiceKeys.length; j++){
-      section.choices[choiceKeys[j]] = section.choices[choiceKeys[j]].get()
+      var choice = section.choices[choiceKeys[j]]
+      choice.container = choice.container.get()
+      choice.underline = choice.underline.get()
     }
 
     //the currently active option
@@ -70,12 +83,14 @@ function choose(sectionName, choice){
     //section until this transition has finished
     section.lock = true
 
+    section.choices[section.current].underline.style.opacity = 0
     //the container of the content of the option that is currently active
-    var from = section.choices[section.current]
+    var from = section.choices[section.current].container
     var fromHeight = from.clientHeight
 
+    section.choices[choice].underline.style.opacity = 1
     //the container of the content of the option we want to transition to
-    var to = section.choices[choice]
+    var to = section.choices[choice].container
     //get the height of the container
     to.style.position = 'absolute'
     to.style.opacity = 0 

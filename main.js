@@ -49,10 +49,10 @@ vistas.push(
   vistaGen(1 - 2 * headerHeight, ['FRONT-END DEVELOPER', 'READY FOR ACTION'])
 )
 vistas.push(
-  vistaGen(.5, ['TESTING'], -.2)
+  vistaGen(.5, ['TESTING'])
 )
 vistas.push(
-  vistaGen(.6, [], -.2)
+  vistaGen(.4, [])
 )
 
 

@@ -31,7 +31,7 @@ module.exports = function(parallaxRatio){
     //if this function is called with no arguments, return
     //the maxHeight
     if(height === undefined)
-      return maxHeight
+      return util.truncate(maxHeight, 2)
   
     if(text === undefined)
       text = []
@@ -108,7 +108,7 @@ module.exports = function(parallaxRatio){
     .share({
       'imageContainer' : imgContainer,
       'image' : img,
-      'vistaContainerHeight' : height, 
+      'vistaContainerHeight' : util.truncate(height, 2), 
       'offset' : offset
     })
   } 

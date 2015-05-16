@@ -33,7 +33,7 @@ module.exports = function(sectionsInfo, height){
     for(var j = 0; j < items.length / 2; j++){
       var item = items[i * (items.length/2) + j]
 
-      menus[i](util.divUnderline(item.menuTitle, false).div.attribute('onclick', 'toSection(&quot;' + item.name + '&quot;)'))
+      menus[i](util.divUnderline(item.menuTitle, false, .75).div.attribute('onclick', 'toSection(&quot;' + item.name + '&quot;)'))
 
       if(j !== (items.length / 2) - 1)
         menus[i](xsvg('17px'))

@@ -121,7 +121,7 @@ module.exports.divUnderline = function(text, active, thickness, color){
   .style('display', 'inline-block')
 
   if(active === false)
-    underline.style('display', 'none')
+    underline.style('opacity', '0')
 
   return {'div' : div, "underline" : underline}
 }

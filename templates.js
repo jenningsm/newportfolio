@@ -45,18 +45,23 @@ module.exports.selectionSection = function(name, title, options){
     {'margin-bottom' : '35px'}
   )
 
+  var underlines = {}
+
   for(var i = 0; i < options.length; i++){
     var displayUnderline = false
     //if this is in the middle
     if(i === middle)
       displayUnderline = true
 
-    menu(
-      util.divUnderline(options[i].title, displayUnderline).div.style({
-        'width' : '0',
-        'text-align' : 'center'
-      }).attribute("onclick", "choose('" + name + "','" + options[i].name + "')"),
-    1)
+    var underlinedDiv = util.divUnderline(options[i].title, displayUnderline)
+    underlines[options[i].name] = underlinedDiv.underline.style('transition', 'opacity .5s')
+    underlinedDiv.div.style({
+      'width' : '0',
+      'text-align' : 'center'
+    })
+    .attribute("onclick", "choose('" + name + "','" + options[i].name + "')"),
+
+    menu(underlinedDiv.div, 1)
 
     if(i !== options.length - 1)
       menu(xsvg('17px'))
@@ -73,7 +78,10 @@ module.exports.selectionSection = function(name, title, options){
 
     body.style('overflow', 'hidden')
     body.style('width', '100%')
-    choices[options[i].name] = body
+    choices[options[i].name] = {
+      'container' : body,
+      'underline' : underlines[options[i].name]
+    }
 
     bodies.push(body)
   }
