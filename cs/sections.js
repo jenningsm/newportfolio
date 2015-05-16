@@ -62,7 +62,7 @@ function toSection(section){
   }
 
   //scroll
-  new MoveGen(pageMover, 1)
+  new MoveGen(pageMover, .03 * Math.pow(Math.abs(target - start), .5))
   .ends(start, target)
   .acceleration(1, 1, .4)
   .callback(doneTravelling)
