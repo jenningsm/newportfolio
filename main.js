@@ -33,8 +33,10 @@ var sectionsInfo = [
 
 //the height, as a proportion of the viewport height, of the header bar
 var headerHeight = .16
-//the ratio of image movement to page scrolling
+//the ratio of parallax image movement to page scrolling
 var parallaxRatio = .5
+//the vertical margin on the suns
+var vertMargin = '50px'
 
 
          /*  -----------  THE VISTAS   ----------  */
@@ -51,7 +53,6 @@ vistas.push(
 
            /*  ---------- THE SUNS ------------ */
 
-var vertMargin = '50px'
 var sunGen = require('./graphics/sun.js')
 var suns = []
 for(var i = 0; i < 3; i++){
