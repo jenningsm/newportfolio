@@ -23,12 +23,7 @@ function lazyListener(target, evt, func, timeGap){
   The suns should have the following behavior:
 
   When a sun first enters the viewport, it should spin
-  and fade in for a certain amount of time, unless we are
-  currently scrolling to a section automatically, due to a
-  user having clicked a menu item. If are automatically
-  scrolling, we should wait until it is done travelling,
-  at which point a 'doneTravelling' event will be fired,
-  and then spin in whatever suns are in the viewport.
+  and fade in for a certain amount of time
 */
 
 function setupSuns(){
@@ -69,14 +64,9 @@ function setupSuns(){
     function onScroll(){
       var scroll = window.pageYOffset
 
-      /*travelling is a variable from sections.js. When it is true, the page
-      is scrolling automatically to a section, due to a menu item having been
-      clicked by the user. When travelling is true, we want to wait until the 
-      page has stopped moving before we spin in any suns. When the page has 
-      finished scrolling, a 'doneTravelling' event will be fired*/
 
-      //if not travelling and the sun is within the viewport
-      if(!travelling && pos > scroll && pos < scroll + viewportHeight){
+      //if the sun is within the viewport
+      if(pos > scroll && pos < scroll + viewportHeight){
         spinIn(sun)
         //remove all the sun's event listeners
         for(var i = 0; i < stops.length; i++){
@@ -89,17 +79,8 @@ function setupSuns(){
     stops.push(lazyListener(window, 'resize', updatePosition, 200))
     stops.push(lazyListener(window, 'bodyChange', updatePosition, 200))
 
-    //check if the sun should spin in
-    //'doneTravelling' is fired after we have just finished automatically 
-    //scrolling to a section
-    window.addEventListener('scroll', onScroll)
-    window.addEventListener('doneTravelling', onScroll)
-    stops.push(function(){
-      window.removeEventListener('scroll', onScroll)
-    }) 
-    stops.push(function(){
-      window.removeEventListener('doneTravelling', onScroll)
-    }) 
+    //check if the sun should spin in on scroll
+    stops.push(lazyListener(window, 'scroll', onScroll, 100))
 
     //get the initial position
     updatePosition()

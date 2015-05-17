@@ -16,13 +16,6 @@ function pageMover(position){
   window.scrollTo(0, position)
 }
 
-//this variable is for the sake of other code
-//it must be true when we are scrolling automatically
-//to a section and false otherwise
-//once we are done scrolling, we must fire a 
-//'doneTravelling' event
-var travelling = false
-
 //section is the name of the section we want to travel to
 function toSection(section){
  
@@ -55,17 +48,10 @@ function toSection(section){
   }
 
 
-  travelling = true
-  function doneTravelling(){
-    travelling = false
-    window.dispatchEvent(new Event('doneTravelling'))
-  }
-
   //scroll
   new MoveGen(pageMover, .03 * Math.pow(Math.abs(target - start), .5))
   .ends(start, target)
   .acceleration(1, 1, .4)
-  .callback(doneTravelling)
   .run()
 }
 
