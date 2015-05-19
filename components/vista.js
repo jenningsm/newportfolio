@@ -14,7 +14,6 @@ var flex = util.flex
 
   height: height of the vista, as a proportion of the viewport
   text: an array containing each row of text to be displayed over the image
-  offset: the vertical offset, as a proportion of the image size, of the image
 
   if this function is called with no arguments, it will return the height of the
   images it has created so far. This info is needed for the client side code
@@ -25,7 +24,7 @@ var areaHeights = []
 var maxHeight = 0
 
 module.exports = function(parallaxRatio){
-  return function(height, text, offset){
+  return function(height, text){
 
     //the max height is needed for the client side code
     //if this function is called with no arguments, return
@@ -35,8 +34,6 @@ module.exports = function(parallaxRatio){
   
     if(text === undefined)
       text = []
-    if(offset === undefined)
-      offset = 0
   
     //make the img as tall as it needs to be for it to parallax without leaving a
     //visible part of the area's top or bottom with image
@@ -45,8 +42,6 @@ module.exports = function(parallaxRatio){
     var buffer = .5 * (1 - height) * parallaxRatio
   
     var imgHeight = 1 + 2 * buffer / height
-    //if the image is offset, it must be bigger in order to fully cover the parallax area
-    imgHeight *= 1 + 2 * Math.abs(offset)
   
     //we want all images to be the same dimensions
     //we need to check if this img is larger than all of the previous
@@ -109,7 +104,6 @@ module.exports = function(parallaxRatio){
       'imageContainer' : imgContainer,
       'image' : img,
       'vistaContainerHeight' : util.truncate(height, 2), 
-      'offset' : offset
     })
   } 
 }

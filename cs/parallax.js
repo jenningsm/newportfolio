@@ -37,11 +37,9 @@ function parallaxInit(){
      The image is larger than the vista container to allow for
      parallax.
 
-     the offset is the amount, as a proportion of the
-     total image size, the image will be offsetted vertically
   */
 
-  function setupParallax(imgContainer, vistaContainer, offset){
+  function setupParallax(imgContainer, vistaContainer){
     //a two element array containing the top and 
     //bottom of the vista container
     var bounds
@@ -60,8 +58,7 @@ function parallaxInit(){
     
       //if vista is within the viewport, parallax the image
       if(position < bounds[1] && position > bounds[0] - viewportHeight){
-        var shift = (bounds[1] - bounds[0]) * offset
-        shift += (position + (viewportHeight / 2) - ((bounds[0] + bounds[1]) / 2)) * ratio
+        var shift = (position + (viewportHeight / 2) - ((bounds[0] + bounds[1]) / 2)) * ratio
         imgContainer.style.transform = "translate3d(0," + shift + "px,0)";
       }
     }
@@ -93,7 +90,7 @@ function parallaxInit(){
     //the height, as a proportion of the viewport, of the vista container
     var vistaContainerHeight = vista.data.vistaContainerHeight
 
-    setupParallax(imgContainer, vista.get(), vista.data.offset)
+    setupParallax(imgContainer, vista.get())
 
     images.push(img)
     vistaContainerHeights.push(vistaContainerHeight)
