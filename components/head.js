@@ -15,5 +15,6 @@ module.exports = new Element('head').content(
     'href' : 'o.css',
     'rel' : 'stylesheet',
     'type' : 'text/css'
-  })
+  }),
+  new Element('title').content('Michael Jennings')
 ).embedJS()
