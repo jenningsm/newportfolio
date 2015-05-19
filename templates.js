@@ -1,5 +1,6 @@
 
 var Element = require('/home/mjennings/pagebuilder/html.js')
+var Selector = require('/home/mjennings/pagebuilder/selector.js')
 var styles = require('./styles.js')
 var colors = require('./color.js')
 var util = require('./util.js')
@@ -11,17 +12,22 @@ var xsvg = require('./graphics/x.js')
   that section (called 'body') and returns an element for that page
 */
 
-var sectionWidth = "60%"
-
 //the vertical margins at the top and bottom of the page
 var sectionStyle = {
-  'width' : sectionWidth,
   'margin' : '0 auto',
   'text-align' : 'justify'}
 
+var width = new Selector()
+width.nest(
+  new Selector("@media (max-width: 600px)", "$").style('width', '80%')
+)
+width.nest(
+  new Selector("@media (min-width: 600px)", "$").style('width', '60%')
+)
+
 module.exports.section = section
 function section(title, body){
-  return new Element('div').style(sectionStyle)
+  return new Element('div')
   .content(
     util.flex("row", ["100%", ''])(
       util.divUnderline(title).div
@@ -30,6 +36,8 @@ function section(title, body){
     body.style('margin', '50px 0'),
     util.flex("row")(util.divUnderline("Back to top", true, .5).div.attribute("onclick", "toSection()"))
   )
+  .style(sectionStyle)
+  .assign(width, ['0'])
 }
 
 /*
