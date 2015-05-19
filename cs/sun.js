@@ -80,7 +80,7 @@ function setupSuns(){
     stops.push(lazyListener(window, 'bodyChange', updatePosition, 200))
 
     //check if the sun should spin in on scroll
-    stops.push(lazyListener(window, 'scroll', onScroll, 100))
+    stops.push(lazyListener(window, 'scroll', onScroll, 70))
 
     //get the initial position
     updatePosition()
