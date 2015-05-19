@@ -33,10 +33,16 @@ function section(title, body){
   .content(
     util.flex("row", ["100%", ''])(
       util.divUnderline(title).div
-      .style(styles.font("2.5em"))
+      .style(
+        styles.font("2.5em")
+      )
     ),
     body.style('margin', '50px 0'),
-    util.flex("row")(util.divUnderline("Back to top", true, .5).div.attribute("onclick", "toSection()"))
+    util.flex("row")(
+      util.divUnderline("Back to top", true, .5).div
+      .attribute("onclick", "toSection()")
+      .style('cursor', 'pointer')
+    )
   )
   .style(sectionStyle)
   .assign(width, ['0'])
@@ -64,7 +70,8 @@ module.exports.selectionSection = function(name, title, options){
       'width' : '0',
       'text-align' : 'center'
     })
-    .attribute("onclick", "choose('" + name + "','" + options[i].name + "')"),
+    .attribute("onclick", "choose('" + name + "','" + options[i].name + "')")
+    .style('cursor', 'pointer')
 
     menu(underlinedDiv.div, 1)
 

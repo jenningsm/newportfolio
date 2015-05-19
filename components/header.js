@@ -34,7 +34,11 @@ module.exports = function(sectionsInfo, height){
     for(var j = 0; j < items.length / 2; j++){
       var item = items[i * (items.length/2) + j]
 
-      menus[i](util.divUnderline(item.menuTitle, false, .75).div.attribute('onclick', 'toSection(&quot;' + item.name + '&quot;)'))
+      menus[i](
+        util.divUnderline(item.menuTitle, false, .75).div
+        .attribute('onclick', 'toSection(&quot;' + item.name + '&quot;)')
+        .style('cursor', 'pointer')
+      )
 
       if(j !== (items.length / 2) - 1){
         var disappear = new Selector()
@@ -61,7 +65,8 @@ module.exports = function(sectionsInfo, height){
 
   //the cursive initials
   var initials = new Element('span').style(
-    styles.font('7.4vmin', '400', "'Calligraffitti', cursive")
+    styles.font('7.4vmin', '400', "'Calligraffitti', cursive"),
+    styles.userSelect('none')
   ).content(
     'MJ'
   )

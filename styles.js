@@ -44,3 +44,12 @@ module.exports.font = function(size, weight, family){
 
   return ret
 }
+
+module.exports.userSelect = function(value){
+  return {
+    '-webkit-user-select' : value,
+    '-moz-user-select' : value,
+    '-ms-user-select' : value,
+    'user-select' : value,
+  }
+}

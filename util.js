@@ -125,6 +125,7 @@ module.exports.divUnderline = function(text, active, thickness, color){
     })
   )
   .style('display', 'inline-block')
+  .style(styles.userSelect("none"))
   .assign(hover, ['box'])
 
   if(active === false)
@@ -206,7 +207,7 @@ function link(text, url){
   return new Element('a')
   .content(spanUnderline(text, .5))
   .style({
-
+    'cursor' : 'pointer',
     'text-decoration' : 'none',
     'outline' : 'none',
     'color' : 'inherit'
@@ -218,5 +219,7 @@ function link(text, url){
 //to the specified section when clicked
 module.exports.inLink = inLink
 function inLink(text, section){
-  return spanUnderline(text, .5).attribute('onclick', 'toSection(&quot;' + section + '&quot;)')
+  return spanUnderline(text, .5)
+         .attribute('onclick', 'toSection(&quot;' + section + '&quot;)')
+         .style('cursor', 'pointer')
 }
