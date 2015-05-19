@@ -41,15 +41,7 @@ module.exports = function(sectionsInfo, height){
       )
 
       if(j !== (items.length / 2) - 1){
-        var disappear = new Selector()
-        var breakpoint = "800px"
-        disappear.nest(
-          new Selector('@media (max-width: ' + breakpoint + ')', '$').style('display', 'none')
-        )
-        disappear.nest(
-          new Selector('@media (min-width: ' + breakpoint + ')', '$').style('display', 'block')
-        )
-        menus[i](xsvg('17px').assign(disappear, [0]))
+        menus[i](xsvg('17px').assign(util.mediaWidth(800, {'display' : 'none'}, {'display' : 'block'}), [0]))
       }
     }
   }
@@ -61,11 +53,12 @@ module.exports = function(sectionsInfo, height){
       { 'background' : color.pString ,
         'border-radius' : '1px'  }
     )
+    .assign(util.mediaWidth(600, {'display' : 'none'}, {'display' : 'block'}), [0])
   }
 
   //the cursive initials
   var initials = new Element('span').style(
-    styles.font('7.4vmin', '400', "'Calligraffitti', cursive"),
+    styles.font('7.4vh', '400', "'Calligraffitti', cursive"),
     styles.userSelect('none')
   ).content(
     'MJ'
@@ -78,10 +71,11 @@ module.exports = function(sectionsInfo, height){
   center(bar(), 1)
 
   //menus, golden bars, and initials
-  var inside = flex('row', ['90%', '100%'], 'space-around')
+  var inside = flex('row', ['', '100%'], 'space-around')
   inside(menus[0]())
   inside(center())
   inside(menus[1]())
+  inside().assign(util.mediaWidth(600, {'width' : '100%'}, {'width' : '90%'}), [0])
 
   //the whole thing centered inside a flex box
   return flex('row', ["100%", 100 * height + '%'])(

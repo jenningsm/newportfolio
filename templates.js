@@ -19,13 +19,6 @@ var sectionStyle = {
   'text-align' : 'justify'}
 
 var breakpoint = "800px"
-var width = new Selector()
-width.nest(
-  new Selector("@media (max-width: " + breakpoint + ")", "$").style('width', '80%')
-)
-width.nest(
-  new Selector("@media (min-width: " + breakpoint + ")", "$").style('width', '60%')
-)
 
 module.exports.section = section
 function section(title, body){
@@ -45,7 +38,7 @@ function section(title, body){
     )
   )
   .style(sectionStyle)
-  .assign(width, ['0'])
+  .assign(util.mediaWidth(800, {'width' : '80%'}, {'width' : '60%'}), ['0'])
 }
 
 /*
@@ -76,15 +69,7 @@ module.exports.selectionSection = function(name, title, options){
     menu(underlinedDiv.div, 1)
 
     if(i !== options.length - 1){
-      var disappear = new Selector()
-      var breakpoint = "1000px"
-      disappear.nest(
-        new Selector('@media (max-width: ' + breakpoint + ')', '$').style('display', 'none')
-      )
-      disappear.nest(
-        new Selector('@media (min-width: ' + breakpoint + ')', '$').style('display', 'block')
-      )
-      menu(xsvg('17px').assign(disappear, [0]))
+      menu(xsvg('17px').assign(util.mediaWidth(1000, {'display' : 'none'}, {'display' : 'block'}), [0]))
     }
 
   }

@@ -224,3 +224,15 @@ function inLink(text, section){
          .attribute('onclick', 'toSection(&quot;' + section + '&quot;)')
          .style('cursor', 'pointer')
 }
+
+
+module.exports.mediaWidth = function(breakPoint, smallstyle, bigstyle){
+  var width = new Selector()
+  width.nest(
+    new Selector('@media (max-width: ' + breakPoint + 'px)', '$').style(smallstyle)
+  )
+  width.nest(
+    new Selector('@media (min-width: ' + breakPoint + 'px)', '$').style(bigstyle)
+  )
+  return width
+}
