@@ -31,7 +31,7 @@ function setupSuns(){
   //when called, makes a sun spin and fade in
   function spinIn(sun){
 
-    function spinner(pos){ sun.style.transform = 'rotate(' + pos + "turn)" }
+    function spinner(pos){ applyTransform(sun, 'rotate(' + pos + "turn)") }
     function fader(pos){ sun.style.opacity = pos }
 
     var time = .8

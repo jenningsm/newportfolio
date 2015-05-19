@@ -59,7 +59,7 @@ function parallaxInit(){
       //if vista is within the viewport, parallax the image
       if(position < bounds[1] && position > bounds[0] - viewportHeight){
         var shift = (position + (viewportHeight / 2) - ((bounds[0] + bounds[1]) / 2)) * ratio
-        imgContainer.style.transform = "translate3d(0," + shift + "px,0)";
+        applyTransform(imgContainer, "translate3d(0," + shift + "px,0)")
       }
     }
  

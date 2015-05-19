@@ -91,6 +91,7 @@ var photoCredit = new Element('div')
         /* ------------- THE SCRIPTS --------------- */
 
 var scripts = [
+  new Element('script', 'src', 'cs/transform.js'),
   new Element('script', 'src', 'cs/viewport.js'),
   new Element('script', 'src', 'cs/parallax.js'),
   new Element('script', 'src', 'cs/motion.js'),

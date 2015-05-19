@@ -30,7 +30,7 @@ module.exports.flex = function(dir, dims, justify){
   return function(item, grow /*...*/){
     for(var i = 0; i < arguments.length; i+=2){
       if(arguments[i+1] !== undefined)
-        arguments[i].style('flex-grow', arguments[i+1])
+        arguments[i].style({'-webkit-flex-grow': arguments[i+1], 'flex-grow' : arguments[i+1]})
     
       f.content(arguments[i])
     }
@@ -110,6 +110,7 @@ module.exports.divUnderline = function(text, active, thickness, color){
       'top' : (100 - underlinePlace) + '%',
       'background' : color,
       'z-index' : -1,
+      '-webkit-transition' : 'opacity .5s',
       'transition' : 'opacity .5s' }
   )
   .assign(hover, ['underline'])

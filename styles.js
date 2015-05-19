@@ -16,9 +16,12 @@ module.exports.flex = function(dir, justify, align){
 
   return {
     'display' : ['-webkit-flex', 'flex'],
+    '-webkit-flex-direction' : dir,
     'flex-direction' : dir,
+    '-webkit-align-items' : align,
     'align-items' : align,
-    'justify-content' : justify
+    '-webkit-justify-content' : justify,
+    'justify-content' : justify,
   }
 }
 
