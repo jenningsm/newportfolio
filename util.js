@@ -1,5 +1,6 @@
 
 var Element = require('/home/mjennings/pagebuilder/html.js')
+var Selector = require('/home/mjennings/pagebuilder/selector.js')
 var styles = require('./styles.js')
 var colors = require('./color.js')
 
@@ -91,6 +92,9 @@ function spanUnderline(text, thickness, color){
   returns an object containing the div (as 'div') and the underline element
   (as 'underline') so that the underline can be hidden and unhidden.
 */
+
+var hover = new Selector('$box:hover $underline').style('opacity', '1')
+
 module.exports.divUnderline = function(text, active, thickness, color){
   if(color === undefined)
     color = colors.pString
@@ -105,8 +109,10 @@ module.exports.divUnderline = function(text, active, thickness, color){
     { 'position' : 'absolute',
       'top' : (100 - underlinePlace) + '%',
       'background' : color,
-      'z-index' : -1 }
+      'z-index' : -1,
+      'transition' : 'opacity .5s' }
   )
+  .assign(hover, ['underline'])
 
   var div = new Element('div')
   .content(
@@ -119,6 +125,7 @@ module.exports.divUnderline = function(text, active, thickness, color){
     })
   )
   .style('display', 'inline-block')
+  .assign(hover, ['box'])
 
   if(active === false)
     underline.style('opacity', '0')

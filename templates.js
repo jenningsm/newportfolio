@@ -54,7 +54,7 @@ module.exports.selectionSection = function(name, title, options){
       displayUnderline = true
 
     var underlinedDiv = util.divUnderline(options[i].title, displayUnderline)
-    underlines[options[i].name] = underlinedDiv.underline.style('transition', 'opacity .5s')
+    underlines[options[i].name] = underlinedDiv.underline
     underlinedDiv.div.style({
       'width' : '0',
       'text-align' : 'center'
