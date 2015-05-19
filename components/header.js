@@ -43,7 +43,7 @@ module.exports = function(sectionsInfo, height){
   //generates the golden bars on each side of the cursive initials  
   function bar(){
     return new Element('div').style(
-      styles.dims('0%', '12%'),
+      styles.dims('0%', '20px'),
       { 'background' : color.pString ,
         'border-radius' : '1px'  }
     )

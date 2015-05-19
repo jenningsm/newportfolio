@@ -34,7 +34,7 @@ var sectionsInfo = [
 ]
 
 //the height, as a proportion of the viewport height, of the header bar
-var headerHeight = .16
+var headerHeight = .2
 //the ratio of parallax image movement to page scrolling
 var parallaxRatio = .5
 //the vertical margin on the suns
@@ -46,13 +46,13 @@ var vertMargin = '50px'
 var vistaGen = require('./components/vista.js')(parallaxRatio)
 var vistas = []
 vistas.push(
-  vistaGen(1 - 2 * headerHeight, ['FRONT-END DEVELOPER', 'READY FOR ACTION'])
+  vistaGen(1 -  headerHeight, ['FRONT-END DEVELOPER', 'READY FOR ACTION'])
 )
 vistas.push(
-  vistaGen(.5, ['TESTING'])
+  vistaGen(.55, ['TESTING'])
 )
 vistas.push(
-  vistaGen(.4, [])
+  vistaGen(1 - 2 * headerHeight, [])
 )
 
 
@@ -64,7 +64,7 @@ for(var i = 0; i < 6; i++){
   var sun = sunGen('50px')
   suns.push(flex("row", ['100%', ''])(sun).share(sun).style('margin', vertMargin + ' 0'))
 }
-suns[0].style('margin', '0 0 ' + vertMargin + ' 0')
+//suns[0].style('margin', '0 0 ' + vertMargin + ' 0')
 
 
         /* ------------ THE SECTIONS --------------- */
@@ -106,9 +106,9 @@ var scripts = [
 html.content(
   require('./components/head.js'),
   body.content(
+    vistas[0].style('border-top', 'none'),
     require('./components/header.js')(sectionsInfo, headerHeight),
-    vistas[0],
-    require('./components/frontBottom.js')(headerHeight),
+//    require('./components/frontBottom.js')(headerHeight),
     suns[0],
     sections.about,
     suns[1],
