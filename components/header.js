@@ -1,5 +1,6 @@
 
 var Element = require('/home/mjennings/pagebuilder/html.js')
+var Selector = require('/home/mjennings/pagebuilder/selector.js')
 var styles = require('../styles.js')
 var xsvg = require('../graphics/x.js')
 var color = require('../color.js')
@@ -35,8 +36,17 @@ module.exports = function(sectionsInfo, height){
 
       menus[i](util.divUnderline(item.menuTitle, false, .75).div.attribute('onclick', 'toSection(&quot;' + item.name + '&quot;)'))
 
-      if(j !== (items.length / 2) - 1)
-        menus[i](xsvg('17px'))
+      if(j !== (items.length / 2) - 1){
+        var disappear = new Selector()
+        var breakpoint = "800px"
+        disappear.nest(
+          new Selector('@media (max-width: ' + breakpoint + ')', '$').style('display', 'none')
+        )
+        disappear.nest(
+          new Selector('@media (min-width: ' + breakpoint + ')', '$').style('display', 'block')
+        )
+        menus[i](xsvg('17px').assign(disappear, [0]))
+      }
     }
   }
 

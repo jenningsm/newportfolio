@@ -12,17 +12,19 @@ var xsvg = require('./graphics/x.js')
   that section (called 'body') and returns an element for that page
 */
 
+
 //the vertical margins at the top and bottom of the page
 var sectionStyle = {
   'margin' : '0 auto',
   'text-align' : 'justify'}
 
+var breakpoint = "800px"
 var width = new Selector()
 width.nest(
-  new Selector("@media (max-width: 600px)", "$").style('width', '80%')
+  new Selector("@media (max-width: " + breakpoint + ")", "$").style('width', '80%')
 )
 width.nest(
-  new Selector("@media (min-width: 600px)", "$").style('width', '60%')
+  new Selector("@media (min-width: " + breakpoint + ")", "$").style('width', '60%')
 )
 
 module.exports.section = section
@@ -66,8 +68,17 @@ module.exports.selectionSection = function(name, title, options){
 
     menu(underlinedDiv.div, 1)
 
-    if(i !== options.length - 1)
-      menu(xsvg('17px'))
+    if(i !== options.length - 1){
+      var disappear = new Selector()
+      var breakpoint = "1000px"
+      disappear.nest(
+        new Selector('@media (max-width: ' + breakpoint + ')', '$').style('display', 'none')
+      )
+      disappear.nest(
+        new Selector('@media (min-width: ' + breakpoint + ')', '$').style('display', 'block')
+      )
+      menu(xsvg('17px').assign(disappear, [0]))
+    }
 
   }
 
