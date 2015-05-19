@@ -69,6 +69,7 @@ for(var i = 0; i < keys.length; i++){
 
     //the currently active option
     section.current = section.first
+    section.choices[section.current].underline.style.opacity = 1
     //used to prevent two transitions from happening at once
     section.lock = false
     choiceSections[keys[i]] = section
@@ -83,7 +84,7 @@ function choose(sectionName, choice){
     //section until this transition has finished
     section.lock = true
 
-    section.choices[section.current].underline.style.opacity = 0
+    section.choices[section.current].underline.style.opacity = ''
     //the container of the content of the option that is currently active
     var from = section.choices[section.current].container
     var fromHeight = from.clientHeight

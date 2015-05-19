@@ -48,12 +48,7 @@ module.exports.selectionSection = function(name, title, options){
   var underlines = {}
 
   for(var i = 0; i < options.length; i++){
-    var displayUnderline = false
-    //if this is in the middle
-    if(i === middle)
-      displayUnderline = true
-
-    var underlinedDiv = util.divUnderline(options[i].title, displayUnderline)
+    var underlinedDiv = util.divUnderline(options[i].title, false, .75)
     underlines[options[i].name] = underlinedDiv.underline
     underlinedDiv.div.style({
       'width' : '0',
