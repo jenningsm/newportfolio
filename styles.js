@@ -15,7 +15,7 @@ module.exports.flex = function(dir, justify, align){
     justify = 'center'
 
   return {
-    'display' : 'flex',
+    'display' : ['-webkit-flex', 'flex'],
     'flex-direction' : dir,
     'align-items' : align,
     'justify-content' : justify
