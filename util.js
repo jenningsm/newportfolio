@@ -183,7 +183,6 @@ function linkify(text){
     split.push(broken[i].substr(0, close))
     split.push(broken[i].substr(close + 1))
   }
-  console.log(split)
 
   var ret = []
 
