@@ -42,6 +42,11 @@ var vertMargin = '50px'
 //the width of each page, as a media query
 var pageWidth = util.mediaWidth(800, {'width' : '80%'}, {'width' : '60%'})
 
+var fixedHeights = []
+
+
+var header = require('./components/header.js')(sectionsInfo, headerHeight)
+
          /*  -----------  THE VISTAS   ----------  */
 
 var vistaGen = require('./components/vista.js')(parallaxRatio)
@@ -55,7 +60,11 @@ vistas.push(
 vistas.push(
   vistaGen(1 - 2 * headerHeight, [])
 )
-
+fixedHeights = [{'element' : vistas[0], 'height' : 1 - headerHeight},
+                {'element' : header, 'height' : headerHeight},
+                {'element' : vistas[1], 'height' : .55},
+                {'element' : vistas[2], 'height' : 1 - 2 * headerHeight}]
+               
 
            /*  ---------- THE SUNS ------------ */
 
@@ -110,8 +119,7 @@ html.content(
   require('./components/head.js'),
   body.content(
     vistas[0].style('border-top', 'none'),
-    require('./components/header.js')(sectionsInfo, headerHeight),
-//    require('./components/frontBottom.js')(headerHeight),
+    header,
     suns[0],
     sections.about,
     suns[1],
@@ -140,7 +148,8 @@ var p = html.generate({
     //the height of the image as a proportion of the viewport height
     'height' : vistaGen()
   },
-  'suns' : suns
+  'suns' : suns,
+  'fixedHeights' : fixedHeights
 },true);
 
 var fs = require('fs');
