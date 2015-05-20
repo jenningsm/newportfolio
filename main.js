@@ -42,8 +42,9 @@ var vertMargin = '50px'
 //the width of each page, as a media query
 var pageWidth = util.mediaWidth(800, {'width' : '80%'}, {'width' : '60%'})
 
-var fixedHeights = []
 
+
+       /* ---------------- THE HEADER ----------------*/
 
 var header = require('./components/header.js')(sectionsInfo, headerHeight)
 
@@ -60,7 +61,10 @@ vistas.push(
 vistas.push(
   vistaGen(1 - 2 * headerHeight, [])
 )
-fixedHeights = [{'element' : vistas[0], 'height' : 1 - headerHeight},
+
+//to be shared with the client side
+//for an explanation of why it is needed, see cs/unjump.js
+percentageHeights = [{'element' : vistas[0], 'height' : 1 - headerHeight},
                 {'element' : header, 'height' : headerHeight},
                 {'element' : vistas[1], 'height' : .55},
                 {'element' : vistas[2], 'height' : 1 - 2 * headerHeight}]
@@ -104,6 +108,7 @@ var photoCredit = new Element('div')
 var scripts = [
   new Element('script', 'src', 'cs/transform.js'),
   new Element('script', 'src', 'cs/viewport.js'),
+  new Element('script', 'src', 'cs/unjump.js'),
   new Element('script', 'src', 'cs/parallax.js'),
   new Element('script', 'src', 'cs/motion.js'),
   new Element('script', 'src', 'cs/move.js'),
@@ -149,7 +154,7 @@ var p = html.generate({
     'height' : vistaGen()
   },
   'suns' : suns,
-  'fixedHeights' : fixedHeights
+  'percentageHeights' : percentageHeights
 },true);
 
 var fs = require('fs');
