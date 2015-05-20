@@ -175,7 +175,13 @@ module.exports.linkedParagraphs = function(paragraphs){
    Returns an array containing the text and link spans
 */
 function linkify(text){
-  split = text.split(/[(\$\()\)]/).filter(function(e) { return e })
+  var broken = text.split('$(').filter(function(e) { return e })
+  var split = [broken[0]]
+  for(var i = 1; i < broken.length; i++){
+    var close = broken[i].indexOf(')')
+    split.push(broken[i].substr(0, close))
+    split.push(broken[i].substr(close + 1))
+  }
 
   var ret = []
 
