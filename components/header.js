@@ -60,7 +60,8 @@ module.exports = function(sectionsInfo, height){
   var initials = new Element('span').style(
     styles.font('7.4vh', '400', "'Calligraffitti', cursive"),
     styles.userSelect('none'),
-    {'margin' : '1vh'}
+    {'margin-right' : '1.6vh',
+     'margin-left' : '.4vh'}
   ).content(
     'MJ'
   )
