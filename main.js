@@ -43,6 +43,18 @@ var vertMargin = '50px'
 var pageWidth = util.mediaWidth(800, {'width' : '80%'}, {'width' : '60%'})
 
 
+      /* ------------------ THE CURTAIN ----------------- */
+
+//a blank white div that covers the whole viewport until the page loads
+var curtain = new Element('div')
+.style(
+  styles.dims('100%', '100%'),
+  {'position' : 'absolute',
+   'z-index' : '10',
+   'pointer-events' : 'none',
+   'background' : 'white' }
+)
+
 
        /* ---------------- THE HEADER ----------------*/
 
@@ -112,6 +124,7 @@ var scripts = [
   new Element('script', 'src', 'cs/parallax.js'),
   new Element('script', 'src', 'cs/motion.js'),
   new Element('script', 'src', 'cs/move.js'),
+  new Element('script', 'src', 'cs/curtain.js'),
   new Element('script', 'src', 'cs/sections.js'),
   new Element('script', 'src', 'cs/choiceSections.js'),
   new Element('script', 'src', 'cs/sun.js'),
@@ -123,6 +136,7 @@ var scripts = [
 html.content(
   require('./components/head.js'),
   body.content(
+    curtain,
     vistas[0].style('border-top', 'none'),
     header,
     suns[0],
@@ -143,6 +157,7 @@ html.content(
 )
 
 var p = html.generate({
+  'curtain' : curtain,
   'sections' : sections,
   'parallax' : {
     'vistas' : vistas,
