@@ -4,12 +4,12 @@ var templates = require('../templates.js')
 var content = require('../content.js')
 var util = require('../util.js')
 
-module.exports = function(name){
+module.exports = function(name, width){
   var body = new Element('div')
   .content(
     util.linkedParagraphs(content("contact"))
   )
   .style('text-align', 'center')
 
-  return templates.section("CONTACT", body)
+  return templates.section("CONTACT", body, width)
 }

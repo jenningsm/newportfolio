@@ -8,7 +8,7 @@ var util = require('../util.js')
   Projects portion of the site
 */
 
-module.exports = function(name){
+module.exports = function(name, width){
   //the different projects
   var options = ['electrodynamics', 'deftly', 'portfolio']
   
@@ -33,6 +33,6 @@ module.exports = function(name){
   }
   
   
-  return templates.selectionSection(name, 'PROJECTS', options)
+  return templates.selectionSection(name, 'PROJECTS', options, width)
 } 
   

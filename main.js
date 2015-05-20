@@ -39,7 +39,8 @@ var headerHeight = .2
 var parallaxRatio = .5
 //the vertical margin on the suns
 var vertMargin = '50px'
-
+//the width of each page, as a media query
+var pageWidth = util.mediaWidth(800, {'width' : '80%'}, {'width' : '60%'})
 
          /*  -----------  THE VISTAS   ----------  */
 
@@ -73,7 +74,7 @@ var sections = {}
 for(var i = 0; i < sectionsInfo.length; i++){
   if(sectionsInfo[i].notDone === undefined){
     var name = sectionsInfo[i].name
-    sections[name] = require('./components/' + name + '.js')(name)
+    sections[name] = require('./components/' + name + '.js')(name, pageWidth)
   }
 }
 
@@ -86,6 +87,7 @@ var photoCredit = new Element('div')
       util.link("Umnak", "https://www.flickr.com/photos/umnak/14558226377/"),
       "."
     )
+    .assign(pageWidth, [0])
 
 
         /* ------------- THE SCRIPTS --------------- */

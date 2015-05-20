@@ -20,7 +20,7 @@ var sectionStyle = {
 
 
 module.exports.section = section
-function section(title, body){
+function section(title, body, width){
   return new Element('div')
   .content(
     util.flex("row", ["100%", ''])(
@@ -37,13 +37,13 @@ function section(title, body){
     )
   )
   .style(sectionStyle)
-  .assign(util.mediaWidth(800, {'width' : '80%'}, {'width' : '60%'}), ['0'])
+  .assign(width, ['0'])
 }
 
 /*
 */
 
-module.exports.selectionSection = function(name, title, options){
+module.exports.selectionSection = function(name, title, options, width){
   var middle = Math.floor((options.length - 1) / 2)
 
   //menu bar
@@ -105,7 +105,8 @@ module.exports.selectionSection = function(name, title, options){
     .content(
       menu(),
       container
-    )
+    ),
+    width
   )
   .share({
     'first' : options[middle].name,

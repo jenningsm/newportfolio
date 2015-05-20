@@ -7,7 +7,7 @@ var util = require('../util.js')
   Experience portion of the site
 */
 
-module.exports = function(name){
+module.exports = function(name, width){
   //The different jobs
   var options = ['dandb', 'amazon', 'viasat']
   
@@ -31,6 +31,6 @@ module.exports = function(name){
   }
   
   
-  return templates.selectionSection(name, 'EXPERIENCE', options)
+  return templates.selectionSection(name, 'EXPERIENCE', options, width)
 } 
   
