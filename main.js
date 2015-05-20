@@ -81,7 +81,7 @@ for(var i = 0; i < sectionsInfo.length; i++){
    /* ---------------- PHOTO CREDIT ------------------- */
 
 var photoCredit = new Element('div')
-    .style('margin', '20px auto')
+    .style('margin', '15px auto')
     .content(
       "The background photo of this page was taken by the Flickr user ",
       util.link("Umnak", "https://www.flickr.com/photos/umnak/14558226377/"),
