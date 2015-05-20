@@ -187,7 +187,7 @@ function linkify(text){
     var item
     if(open){
       var info = split[j].split(',')
-      if(info[1].indexOf('@') === -1){
+      if(info[1].indexOf('@') !== 0){
         item = link(info[0], info[1])
       } else {
         item = inLink(info[0], info[1].substr(1))
