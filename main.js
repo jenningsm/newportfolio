@@ -13,7 +13,7 @@ var body = new Element('body').style({
  'margin' : '0',
  'padding' : '0',
  'font-family' : "'Open Sans Condensed', sans serif",
- 'font-weight' : '400', 
+ 'font-weight' : '300', 
  'font-size' : '1.3em',
  'text-align' : 'center'
 })
@@ -85,12 +85,21 @@ percentageHeights = [{'element' : vistas[0], 'height' : 1 - headerHeight},
            /*  ---------- THE SUNS ------------ */
 
 var sunGen = require('./graphics/sun.js')
+
+/*var sunArgs = [
+  [9, [3,4]],
+  [11, [3, 5]],
+  [11, [4, 5], .025],
+  [9, [2, 3, 4], .03],
+  [13, [4, 7], .03],
+  [15, [6]]
+]*/
+
 var suns = []
 for(var i = 0; i < 6; i++){
   var sun = sunGen('50px')
   suns.push(flex("row", ['100%', ''])(sun).share(sun).style('margin', vertMargin + ' 0'))
 }
-//suns[0].style('margin', '0 0 ' + vertMargin + ' 0')
 
 
         /* ------------ THE SECTIONS --------------- */

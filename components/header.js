@@ -85,7 +85,7 @@ module.exports = function(sectionsInfo, height){
   )
   .style(
     {'text-align' : 'center'},
-    styles.font('3.75vmin', '400', "'Open Sans Condensed', sans serif")
+    styles.font('3.75vmin', '300', "'Open Sans Condensed', sans serif")
   )
 } 
   
