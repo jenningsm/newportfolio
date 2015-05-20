@@ -18,7 +18,6 @@ var sectionStyle = {
   'margin' : '0 auto',
   'text-align' : 'justify'}
 
-var breakpoint = "800px"
 
 module.exports.section = section
 function section(title, body){
@@ -51,7 +50,9 @@ module.exports.selectionSection = function(name, title, options){
   var menu = util.flex("row", ["100%", ''])
   menu().style(
     styles.font("1.25em"),
-    {'margin-bottom' : '35px'}
+    {'margin-bottom' : '35px',
+     '-webkit-flex-wrap' : 'wrap',
+     'flex-wrap' : 'wrap' }
   )
 
   var underlines = {}
@@ -60,11 +61,16 @@ module.exports.selectionSection = function(name, title, options){
     var underlinedDiv = util.divUnderline(options[i].title, false, .75)
     underlines[options[i].name] = underlinedDiv.underline
     underlinedDiv.div.style({
-      'width' : '0',
+      'cursor' : 'pointer',
       'text-align' : 'center'
     })
     .attribute("onclick", "choose('" + name + "','" + options[i].name + "')")
-    .style('cursor', 'pointer')
+    
+    //in order for the menu items to have a fixed horizontal alignment, their widths must be set to 0.
+    //however, if their widths are set to 0, then the containing flex box won't wrap the menu items.
+    //therefore, when the screen is small enough for the box to need to wrap the items, 
+    //set the width to auto so that it will wrap, otherwise set the width to 0
+    underlinedDiv.div.assign(util.mediaWidth(500, {'width' : 'auto'}, {'width' : '0'}), [0])
 
     menu(underlinedDiv.div, 1)
 
