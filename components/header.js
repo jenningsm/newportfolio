@@ -49,17 +49,18 @@ module.exports = function(sectionsInfo, height){
   //generates the golden bars on each side of the cursive initials  
   function bar(){
     return new Element('div').style(
-      styles.dims('0%', '20px'),
+      styles.dims('0%', '10%'),
       { 'background' : color.pString ,
         'border-radius' : '1px'  }
     )
-    .assign(util.mediaWidth(600, {'display' : 'none'}, {'display' : 'block'}), [0])
+    .assign(util.mediaWidth(700, {'display' : 'none'}, {'display' : 'block'}), [0])
   }
 
   //the cursive initials
   var initials = new Element('span').style(
     styles.font('7.4vh', '400', "'Calligraffitti', cursive"),
-    styles.userSelect('none')
+    styles.userSelect('none'),
+    {'margin' : '1vh'}
   ).content(
     'MJ'
   )
@@ -67,7 +68,7 @@ module.exports = function(sectionsInfo, height){
   //the initials along with the golden bars
   var center = flex('row', ['18%', '100%'], 'space-between')
   center(bar(), 1)
-  center(initials, .67)
+  center(initials, .5)
   center(bar(), 1)
 
   //menus, golden bars, and initials
