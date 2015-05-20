@@ -1,9 +1,12 @@
-My name is Michael Jennings, and I'm looking for work as a front-end developer
-I graduated from the University of California, Los Angeles with a B.S. in Computer Science
-a little more than a year ago. I've
-worked three internships.
+My name is Michael Jennings. I'm a software developer living in Portland and 
+am looking for work as a front-end developer.
 
-Most of my previous experience has been with the backend, but now I'm looking to make the switch
+I graduated from the University of California, Los Angeles with a degree in Computer
+Science. I've had $(internships,@experience) at Amazon, ViaSat, and D&B Credibility Corporation.
+Most of my previous experience has been with the backend, but I'm now looking to make the switch
 over to the front end. I've been working on my own to time to develop my skills, and have come to a
 solid understanding of HTML, CSS, and especially Javascript. I'm a quick learner and can pick up whatever
 I need to to get my job done. Check out some of my $(projects,@projects).
+
+I like to make beautiful things with code, my style is minimalist, and I like to do things
+differently. Feel free to $(reach out,mailto:mpjngs@gmail.com) to me.

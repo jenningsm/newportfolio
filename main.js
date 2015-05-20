@@ -68,7 +68,7 @@ vistas.push(
   vistaGen(1 -  headerHeight, ['FRONT-END DEVELOPER', 'READY FOR ACTION'])
 )
 vistas.push(
-  vistaGen(.55, ['TESTING'])
+  vistaGen(.55, ['BUILDING BEAUTIFUL WEBSITES'])
 )
 vistas.push(
   vistaGen(1 - 2 * headerHeight, [])
@@ -179,7 +179,7 @@ var p = html.generate({
   },
   'suns' : suns,
   'percentageHeights' : percentageHeights
-},true);
+},false);
 
 var fs = require('fs');
 if(p.css !== undefined){

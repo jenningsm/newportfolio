@@ -1,5 +1,11 @@
 VIASAT
 
 I worked as a Software Engineering Intern at ViaSat during the Summer of 2012.
-At ViaSat I worked on a team of three interns to develop a prototype
-for a home security and automation system. I worked primarily in Java.
+While there, I worked on a team of three interns to develop a prototype
+for a home security and automation system. We had a functioning prototype
+by the end of the Summer.
+
+I worked primarily in Java. My
+responsibilities on the team included setting up and maintaining an Enterprise
+Service Bus, developing a rules database using the Drools rules engine, and
+creating a framework for interfacing with heterogeneous smart devices. 
