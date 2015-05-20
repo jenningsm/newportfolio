@@ -16,5 +16,9 @@ module.exports = new Element('head').content(
     'rel' : 'stylesheet',
     'type' : 'text/css'
   }),
-  new Element('title').content('Michael Jennings')
+  new Element('title').content('Michael Jennings'),
+  new Element('meta').attribute({
+    'name' : 'viewport',
+    'content' : 'width=device-width, initial-scale=1'
+  })
 ).embedJS()
