@@ -2,6 +2,6 @@ ELECTRODYNAMICS
 
 Electrodynamics is a very simple Android app I built. The app generates
 lightning bolt visuals when the user touches the screen. It was built in
-java and uses OpenGL for the graphics.
+Java and uses OpenGL for the graphics.
 
 Available for free $(here,https://play.google.com/store/apps/details?id=com.mjngs.gllightning)

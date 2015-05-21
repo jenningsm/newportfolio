@@ -1,12 +1,13 @@
 DEFTLY
 
-Deftly is a website I built to display some of my generative sketches.
-It's a relatively simple single-page site. A lot of work went into
+Deftly is a single-page website I built to display some of my generative
+sketches. A lot of work went into
 crafting the transitions from sketch to sketch, and I think they turned
 out well. Building it was really
 an adventure in javascript. Unfortunately, the javascript I wrote ended up
-being pretty much unmaintainable, but I learned alot from the experience and now
-make a great effort to keep my code as simple as possible. You can see the code for yourself on
+being pretty much unmaintainable, but I learned a lot from the experience
+and now make a great effort to keep my code as simple as possible.
+You can see the code for yourself on
 $(Github,https://github.com/jenningsm/deft).
 
 

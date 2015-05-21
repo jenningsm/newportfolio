@@ -1,15 +1,14 @@
 OLD PORTFOLIO
 
-My old portfolio site. It's a relatively simple site. I built it as a no-scroll site
-which, in hindsight, limited the content I could
-display on it and made it hard to format. You can check out the
+My old portfolio site was a single-page, no-scroll site. You can check out the
 code on $(Github,https://github.com/jenningsm/portfolio), but it was built
 with a $(node library,https://github.com/jenningsm/element.js)
 I'm developing that, unfortunately, I have yet to document, so it might
 not make a lot of sense. 
 
-After I finished building it, I built a new site (this one) to replace it, partly because
-of the reason I mentioned above and partly because I just wanted to build
-something.
+After I finished building the site, I built a new one (this site) to replace
+it, partly because the no-scroll format made it difficult to include the
+content I thought my site needed, and partly because I just 
+wanted to build something. The site is still available at the link below.
 
 $(www.mjngs.com,http://www.mjngs.com)
