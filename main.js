@@ -127,7 +127,8 @@ var photoCredit = new Element('div')
         /* ------------- THE SCRIPTS --------------- */
 
 var scripts = [
-  new Element('script', 'src', 'cs/transform.js'),
+  new Element('script', 'src', 'cs/cs.min.js')
+/*  new Element('script', 'src', 'cs/transform.js'),
   new Element('script', 'src', 'cs/viewport.js'),
   new Element('script', 'src', 'cs/unjump.js'),
   new Element('script', 'src', 'cs/parallax.js'),
@@ -136,7 +137,7 @@ var scripts = [
   new Element('script', 'src', 'cs/curtain.js'),
   new Element('script', 'src', 'cs/sections.js'),
   new Element('script', 'src', 'cs/choiceSections.js'),
-  new Element('script', 'src', 'cs/sun.js'),
+  new Element('script', 'src', 'cs/sun.js'),*/
 ]
 
 
