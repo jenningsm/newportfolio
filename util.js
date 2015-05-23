@@ -15,9 +15,13 @@ var colors = require('./color.js')
 
   and then returns a function. This function takes as arguments
   first an item to insert into the flexbox, and then, optionally,
-  the flex-grow value for that item. The function then returns the
-  flexbox. If the function is called without arguments it will return
-  the flexbox without doing anything.
+  the flex-grow value for that item. This item is inserted into the
+  flex box and then the flexbox is returned. If the function is
+  called without arguments it will return the flexbox without doing
+  anything. The function may take any number of arguments that is a
+  multiple of two, in which case the first element of each pair is 
+  interpreted as an element to insert and the second element is its
+  flex-grow value.
 */
 module.exports.flex = function(dir, dims, justify){
   var f = new Element('div').style(
@@ -43,11 +47,11 @@ module.exports.flex = function(dir, dims, justify){
 //of the element
 var underlinePlace = 9
 
-//standard underline thickness
+//standard underline thickness, in pixels
 var thicknessStandard = 4
 
 /*
-  Creates a span containing the string text
+  Creates a span containing the string text underlined
 
   text: a string to underline
   thickness: the thickness of the underline as a proportion of thicknessStandard
@@ -87,12 +91,15 @@ function spanUnderline(text, thickness, color){
   Similar to spanUnderline, but a div instead of a span. It's a little cleaner
   than spanUnderline, but it can't be put inside paragraph tags
 
-  if the parameter active is false, then the underline will be hidden
+  text, thickness, and color parameters mean the same thing as in spanUnderline
+  if the parameter 'active' is false, then the underline's opacity style will
+  be set to '0'
 
   returns an object containing the div (as 'div') and the underline element
-  (as 'underline') so that the underline can be hidden and unhidden.
+  (as 'underline').
 */
 
+//selector to be applied to underlines so they show up when hovered over
 var hover = new Selector('$box:hover $underline').style('opacity', '1')
 
 module.exports.divUnderline = function(text, active, thickness, color){
@@ -148,9 +155,11 @@ function truncate(number, precision){
    Takes an array of strings, each of which is interpreted
    as a paragraph.
 
-   For each paragraph, links are substituted according to the
-   convention described in linkify below, and the the whole
-   paragraph is wrapped in a p tag
+   For each paragraph, links are subsituted with linked spans
+   and the whole pargraph is wrapped in p tags.
+
+   links are denoted according to the convention described in
+   the comments for linkify below
 
    returns an array of the formatted paragraphs
 */
@@ -175,8 +184,9 @@ module.exports.linkedParagraphs = function(paragraphs){
    Returns an array containing the text and link spans
 */
 function linkify(text){
-  var broken = text.split('$(').filter(function(e){ return e })
+  //split the paragraph up by instances of links
   var broken = text.split('$(')
+  //an array containing the split text
   var split = [broken[0]]
   for(var i = 1; i < broken.length; i++){
     var close = broken[i].indexOf(')')
@@ -185,18 +195,17 @@ function linkify(text){
   }
 
   var ret = []
-
   var open = false
-//  if(text.indexOf('$') === 0)
-//    open = true
 
   for(var j = 0; j < split.length; j++){
     var item
     if(open){
       var info = split[j].split(',')
       if(info[1].indexOf('@') !== 0){
+        //set as link to external site
         item = link(info[0], info[1])
       } else {
+        //set as link to internal section
         item = inLink(info[0], info[1].substr(1))
       }
       open = false
@@ -233,6 +242,10 @@ function inLink(text, section){
 }
 
 
+//returns a selector styled with a media query so that elements assigned 
+//to it will be styled with smallstyle when the width of the screen is less
+//than breakPoint pixels and bigstyle when the width of the screen is more
+//than breakPoint pixels
 module.exports.mediaWidth = function(breakPoint, smallstyle, bigstyle){
   var width = new Selector()
   width.nest(

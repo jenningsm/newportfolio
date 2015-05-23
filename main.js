@@ -86,15 +86,6 @@ percentageHeights = [{'element' : vistas[0], 'height' : 1 - headerHeight},
 
 var sunGen = require('./graphics/sun.js')
 
-/*var sunArgs = [
-  [9, [3,4]],
-  [11, [3, 5]],
-  [11, [4, 5], .025],
-  [9, [2, 3, 4], .03],
-  [13, [4, 7], .03],
-  [15, [6]]
-]*/
-
 var suns = []
 for(var i = 0; i < 6; i++){
   var sun = sunGen('50px')
@@ -108,7 +99,9 @@ var sections = {}
 for(var i = 0; i < sectionsInfo.length; i++){
   if(sectionsInfo[i].notDone === undefined){
     var name = sectionsInfo[i].name
-    sections[name] = require('./components/' + name + '.js')(name, pageWidth)
+    sections[name] = require('./components/' + name + '.js')(name)
+    //set the width of the section
+    sections[name].assign(pageWidth, ['0'])
   }
 }
 

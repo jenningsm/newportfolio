@@ -48,6 +48,7 @@ module.exports.font = function(size, weight, family){
   return ret
 }
 
+//return prefixed styling for user-select
 module.exports.userSelect = function(value){
   return {
     '-webkit-user-select' : value,
