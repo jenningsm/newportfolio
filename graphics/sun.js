@@ -4,7 +4,8 @@ var color = require('../color.js').pString
 var svg = require('./svg.js')
 
 /*
-  Creates an svg sun.
+  Creates an svg sun. The opacity of the sun will intially be
+  set to 0.
 
   size: the size of the sun
   numPoints: the number of points the sun has

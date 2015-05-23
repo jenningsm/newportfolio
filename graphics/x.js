@@ -2,7 +2,7 @@ var Element = require('/home/mjennings/pagebuilder/html.js')
 var defaultColor = require('../color.js').pString
 var svg = require('./svg.js')
 
-//creates an svg X image, with given size and color
+//return an svg X image, with given size and color
 module.exports = function(size, color){
 
   if(color === undefined)

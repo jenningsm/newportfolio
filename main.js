@@ -172,6 +172,7 @@ var p = html.generate({
     'height' : vistaGen()
   },
   'suns' : suns,
+  //as described in cs/unjump.js
   'percentageHeights' : percentageHeights
 },false);
 

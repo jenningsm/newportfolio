@@ -4,7 +4,7 @@ var getContent = require('../content.js')
 var util = require('../util.js')
 
 /*
-  Experience portion of the site
+  Experience section of the site
 */
 
 module.exports = function(name, width){

@@ -9,10 +9,12 @@ var flex = util.flex
 var divUnderline = util.divUnderline
 
 /*
-  The very top of the page
+  The bar at the bottom of the viewport when the viewport is
+  at the top of the page.
 
   items: the menu items
-  height: height of the header as a proportion of the viewport
+  height: height of the header as a proportion of the height
+          of the viewport
 
   the header is a flex box which itself contains three flex boxes.
   the first and last of these are the two halves of the menu, and the
@@ -20,6 +22,7 @@ var divUnderline = util.divUnderline
 */
 
 module.exports = function(sectionsInfo, height){
+  //the menu items
   var items = [];
   for(var i = 0; i < sectionsInfo.length; i++){
     if(sectionsInfo[i].menuTitle !== undefined)

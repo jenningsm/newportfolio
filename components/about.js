@@ -4,6 +4,10 @@ var templates = require('../templates.js')
 var content = require('../content.js')
 var util = require('../util.js')
 
+/*
+  The 'ABOUT ME' section
+*/
+
 module.exports = function(name, width){
   var body = new Element('div')
   .content(util.linkedParagraphs(content("about")))
