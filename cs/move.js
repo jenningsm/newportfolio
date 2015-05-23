@@ -44,6 +44,7 @@ MoveGen.prototype.interrupt = function(){
   return this.callback 
 }
 
+//begin the movement
 MoveGen.prototype.run = function(){
   var time = 0
   var speed = 1 / (60 * this.time)

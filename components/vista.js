@@ -19,8 +19,20 @@ var flex = util.flex
   images it has created so far. This info is needed for the client side code
 */
 
+/*
+  There are two distinct components we deal with in this code: areas and images.
+  Each area is the visible area of its vista. It is as tall as the height parameter
+  passed to the function call that created the vista.
+  Each image is the image contained within the area of its vista. It is taller
+  than the area, so than it may parallax. The parts of the image that lie outside
+  the area are not visible.
+*/
+
+//the imgs that have been created with this function
 var imgs = []
+//the heights of each area, as a proportion of the viewport height
 var areaHeights = []
+//the maximum image height, as a proportion of the viewport height
 var maxHeight = 0
 
 module.exports = function(parallaxRatio){
@@ -36,9 +48,10 @@ module.exports = function(parallaxRatio){
       text = []
   
     //make the img as tall as it needs to be for it to parallax without leaving a
-    //visible part of the area's top or bottom with image
+    //visible part of the area's top or bottom without image
   
     //the amount of extra image, in percentage points, we need on both the top and bottom
+    //of the area
     var buffer = .5 * (1 - height) * parallaxRatio
   
     var imgHeight = 1 + 2 * buffer / height
@@ -55,6 +68,7 @@ module.exports = function(parallaxRatio){
       imgHeight = maxHeight / height
     } else {
       maxHeight = imgHeight * height
+      //set all the previous images to this height
       for(var i = 0; i < imgs.length; i++){
         imgs[i].style({
           'min-height' : util.truncate(100 * maxHeight / areaHeights[i], 3) + "%",
