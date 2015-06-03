@@ -174,7 +174,7 @@ var p = html.generate({
   'suns' : suns,
   //as described in cs/unjump.js
   'percentageHeights' : percentageHeights
-},false);
+},true);
 
 var fs = require('fs');
 if(p.css !== undefined){
